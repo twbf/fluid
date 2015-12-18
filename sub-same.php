@@ -9,10 +9,10 @@
     <nav>
         <ul>
             <li><a href="http://twbf.github.io/fluid">Home</a></l>
-            <li><a href="services">Services</a></l>
-            <li><a href="about-us">About-Us</a></l>
-            <li><a href="portfolio">Portfolio</a></l>
-            <li><a href="employee">Employees</a></l>
+            <li><a href="../services">Services</a></l>
+            <li><a href="../about-us">About-Us</a></l>
+            <li><a href="../portfolio">Portfolio</a></l>
+            <li><a href="../employee">Employees</a></l>
         </ul>
     </nav>
   </body>
