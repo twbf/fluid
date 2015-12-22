@@ -15,9 +15,7 @@
     
    $auth = mysql_query($query2, $db) or die(mysql_error($db));
     
-    //Results
-    
-    
+    //Results 
     
     echo '<br>';
     
@@ -29,18 +27,21 @@
     
     if ($securityLevel==5){
         //What Employees can see
-        echo "Thank you or signing in ". $name . '.';
+        echo "Thank you for signing in ". $name . '.';
         echo '
         <br>
         <a href="command-mysql.php">Command Mysql</a>
         <br>
+        <a href="update-users.php?action=add">ADD USER</add>
         <table>';
         while ($row = mysql_fetch_assoc($result)) {
             echo '<tr>';
             foreach ($row as $value) {
                 echo '<td>' . $value . '</td>';
             }
-            echo '</tr>';
+            echo'
+            <td><a href="update-users.php?action=delete&id=' . $row['user_id'] . '">Delete</a></td>
+            </tr>';
         }
         echo '</table>';
     }else{
