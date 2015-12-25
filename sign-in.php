@@ -1,6 +1,15 @@
 <?php
+session_start();
+    //geting variables from form
     $name = $_POST['username'];
     $pass = $_POST['password'];
+    
+    //starting session
+    
+    $_SESSION['username'] = $name;
+    //$_SESSION['password'] = $pass
+    
+    //making variables mysql friendly
     $name = '"'.$name.'"';
     $pass = '"'.$pass.'"';
     
@@ -25,6 +34,8 @@
        }
     }
     
+    $_SESSION['securityLevel'] = $securityLevel;
+    
     if ($securityLevel==5){
         //What Employees can see
         echo "Thank you for signing in ". $name . '.';
@@ -40,7 +51,9 @@
                 echo '<td>' . $value . '</td>';
             }
             echo'
-            <td><a href="update-users.php?action=delete&id=' . $row['user_id'] . '">Delete</a></td>
+            <td><a href="update-users.php?action=delete&id=' . $row['user_id'] . '">Delete</a></td>';
+            echo'
+            <td><a href="update-users.php?action=edit&id=' . $row['user_id'] . '">Edit</a></td>
             </tr>';
         }
         echo '</table>';

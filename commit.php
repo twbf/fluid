@@ -1,4 +1,7 @@
 <?php
+session_start();
+    if ($_SESSION['securityLevel']==5){
+    
     //Connect To Server
     $db = mysql_connect('localhost','root', 'abcdef')or die('fail');
     mysql_select_db('admin', $db) or die(mysql_error($db));
@@ -31,7 +34,12 @@
         echo '<p>User with the id ' . $id . ' Succesfully Deleted</p>
               <a href="sign-in.php">Back To Administrator Console</a>';
         break;
+    case 'edit':
+        $query = ''
      }
+     }else{
+       echo 'You do not have permission to veiw this site'; 
+    }
 ?>
         
     </body>
