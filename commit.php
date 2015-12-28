@@ -28,14 +28,22 @@ session_start();
                <a href="sign-in.php">Back To Administrator Console</a>';
          break;
      case 'delete':
-        $id =$_GET['id'];
+        $id = $_GET['id'];
         $query = 'DELETE FROM users WHERE ' . $id . '=user_id';
         mysql_query($query, $db) or die(mysql_error($db));
-        echo '<p>User with the id ' . $id . ' Succesfully Deleted</p>
+        echo '<p>User with the id ' . $id . ' succesfully deleted</p>
               <a href="sign-in.php">Back To Administrator Console</a>';
         break;
     case 'edit':
-        $query = ''
+        $id = $_GET['id'];
+        $query = 'UPDATE users SET 
+            user_name ="' . $_POST['username'] . '",
+            user_pass =' . $_POST['password'] . ',
+            security_level =' . $_POST['security_level'] . '
+            WHERE user_id = ' . $id;
+        mysql_query($query, $db) or die(mysql_error($db));
+        echo '<p>User with the id ' . $id . ' succesfully edited</p>
+              <a href="sign-in.php">Back To Administrator Console</a>';
      }
      }else{
        echo 'You do not have permission to veiw this site'; 
