@@ -1,5 +1,6 @@
 <?php
 session_start();
+
     if ($_SESSION['securityLevel']==5){
     
     //Connect To Server
@@ -25,14 +26,14 @@ session_start();
                 ' . $security_level . ')';
          mysql_query($query, $db) or die(mysql_error($db));
          echo '<p>New User Successfully Added</p>
-               <a href="sign-in.php">Back To Administrator Console</a>';
+               <a href="admin.php">Back To Administrator Console</a>';
          break;
      case 'delete':
         $id = $_GET['id'];
         $query = 'DELETE FROM users WHERE ' . $id . '=user_id';
         mysql_query($query, $db) or die(mysql_error($db));
         echo '<p>User with the id ' . $id . ' succesfully deleted</p>
-              <a href="sign-in.php">Back To Administrator Console</a>';
+              <a href="admin.php">Back To Administrator Console</a>';
         break;
     case 'edit':
         $id = $_GET['id'];
@@ -43,7 +44,7 @@ session_start();
             WHERE user_id = ' . $id;
         mysql_query($query, $db) or die(mysql_error($db));
         echo '<p>User with the id ' . $id . ' succesfully edited</p>
-              <a href="sign-in.php">Back To Administrator Console</a>';
+              <a href="admin.php">Back To Administrator Console</a>';
      }
      }else{
        echo 'You do not have permission to veiw this site'; 

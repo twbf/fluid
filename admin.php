@@ -7,14 +7,10 @@ session_start();
         FROM
             users';
    $result = mysql_query($query, $db) or die(mysql_error($db));
-    
-    
     if ($_SESSION['securityLevel']==5){
         //What Employees can see
-        echo "Thank you for signing in ". $name . '.';
+        echo "Thank you for signing in ". $_SESSION['username'] . '.';
         echo '
-        <br>
-        <a href="command-mysql.php">Command Mysql</a>
         <br>
         <a href="update-users.php?action=add">ADD USER</add>
         <table>';

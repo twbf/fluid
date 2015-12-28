@@ -8,30 +8,24 @@
     </ul>
 </nav>
 <?php
-    
     $_SESSION['username'] = $_POST['username'];
     $_SESSION['password'] = $_POST['password'];
 
     $name = '"'.$_SESSION['username'].'"';
     $pass = '"'.$_SESSION['password'].'"';
-    echo 'hjhg';
     $query2 = 'SELECT security_level FROM users WHERE user_name = ' . $name . 'AND user_pass = ' . $pass;
-    echo 'hjhg';
     $auth = mysql_query($query2, $db) or die(mysql_error($db));
-    echo 'hjhg';
     while ($row = mysql_fetch_assoc($auth)) {
        foreach ($row as $value) {
            $securityLevel .= $value;
        }
     }
-    echo 'hjhg';
-    echo $securityLevel;
-    if(isset($_SESSION['securityLevel'])){
+    if(isset($_SESSION['username'])){
         $_SESSION['securityLevel'] = $securityLevel;
         echo '<p>Thank you for signing in '. $_SESSION['username'] . '.</a>';
         
         if($_SESSION['securityLevel']==5){
-            echo '<a href="sign-in.php">Administration Page</a>';
+            echo '<a href="admin.php">Administration Page</a>';
         }
     } else {
 ?>

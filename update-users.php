@@ -1,5 +1,6 @@
 <?php
 session_start();
+
     if ($_SESSION['securityLevel']==5){
     
     //Connect To Server
@@ -35,7 +36,7 @@ session_start();
         echo '
         <p>Are you sure you want to delete this user?</p>
         <p>There is no going back<p>
-        <a href="sign-in.php">No</a>
+        <a href="admin.php">No</a>
         <a href="commit.php?action=delete&id=' . $_GET['id'] . '">Yes</a>';
         break;
     case 'edit':
