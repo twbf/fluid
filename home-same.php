@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="home-css.css">
 <h1>Fluid</h1>
 <nav>
     <ul>

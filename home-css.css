@@ -4,6 +4,10 @@ body{
   background-repeat:no-repeat;
 }
 
+table .admin{
+    border: 1px solid black;
+}
+
 nav a{
   text-decoration:none;
 }

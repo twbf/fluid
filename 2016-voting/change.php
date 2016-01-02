@@ -1,7 +1,5 @@
 <?php
 session_start();
-
-    if ($_SESSION['securityLevel']==5){
     
     //Connect To Server
     $db = mysql_connect('localhost','root', 'abcdef')or die('fail');
@@ -17,21 +15,23 @@ session_start();
 
     switch($_GET['action']) {
     case 'add':
+    if ($_SESSION['securityLevel']==1){
 ?>
-        <form action="commit.php?action=add" method="post">
-            Username:
-            <input type="text" name="username">
-            Password:
-            <input type="password" name="password">
-            Security Level
-            <select name="security_level">
+        <form action="result.php?action=add" method="post">
+            Full Name:
+            <input type="text" name="name">
+            Birth Year:
+            <select name="birth-year">
 <?php
-        for($total=1;$total<=5;$total++){
+        for($total=2016;$total>1900;$total--){
             echo '<option value="' . $total . '">' . $total . '</option>';
         }
         echo'
-        <input type="submit" value="Add User">
+        <input type="submit" value="Add voter">
         </form>';
+        }else{
+           echo 'You do not have permission to veiw this site'; 
+        }
         break;
     case 'delete':
         echo '
@@ -40,7 +40,7 @@ session_start();
         <a href="admin.php">No</a>
         <a href="commit.php?action=delete&id=' . $_GET['id'] . '">Yes</a>';
         break;
-    case 'edit':
+    case 'vote':
         $query = 'SELECT user_name,user_pass,security_level FROM users where user_id=' . $_GET['id'];
         $result = mysql_query($query, $db) or die(mysql_error($db));
         extract(mysql_fetch_assoc($result));
@@ -63,9 +63,6 @@ session_start();
             <input type="submit" name="submit" value="Edit User">
 <?php
         break;
-    }
-    }else{
-       echo 'You do not have permission to veiw this site'; 
     }
 ?>
            

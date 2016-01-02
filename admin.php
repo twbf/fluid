@@ -1,6 +1,6 @@
 <?php
 session_start();
-    
+    echo '<link rel="stylesheet" type="text/css" href="home-css.css">';
     $db = mysql_connect('localhost','root', 'abcdef')or die('fail');
     mysql_select_db('admin', $db) or die(mysql_error($db));
     $query = 'SELECT *
@@ -13,7 +13,7 @@ session_start();
         echo '
         <br>
         <a href="update-users.php?action=add">ADD USER</add>
-        <table>';
+        <table class="admin">';
         while ($row = mysql_fetch_assoc($result)) {
             echo '<tr>';
             foreach ($row as $value) {
@@ -22,8 +22,7 @@ session_start();
             echo'
             <td><a href="update-users.php?action=delete&id=' . $row['user_id'] . '">Delete</a></td>';
             echo'
-            <td><a href="update-users.php?action=edit&id=' . $row['user_id'] . '">Edit</a></td>
-            </tr>';
+            <td><a href="update-users.php?action=edit&id=' . $row['user_id'] . '">Edit</a></td>';
         }
         echo '</table>';
     }else{
