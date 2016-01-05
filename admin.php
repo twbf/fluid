@@ -12,7 +12,7 @@ session_start();
         echo "Thank you for signing in ". $_SESSION['username'] . '.';
         echo '
         <br>
-        <a href="update-users.php?action=add">ADD USER</add>
+        <a href="update-users.php?action=add">Add User</a>
         <table class="admin">';
         while ($row = mysql_fetch_assoc($result)) {
             echo '<tr>';

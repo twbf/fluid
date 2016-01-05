@@ -3,12 +3,12 @@ session_start();
     
     //Connect To Server
     $db = mysql_connect('localhost','root', 'abcdef')or die('fail');
-    mysql_select_db('admin', $db) or die(mysql_error($db));
+    mysql_select_db('voting', $db) or die(mysql_error($db));
 ?>
 <html>
     <head>
         <title>Changing Users</title>
-        <link rel="stylesheet" type="text/css" href="home-css.css">
+        <link rel="stylesheet" type="text/css" href="css.css">
     </head>
     <body>
 <?php
@@ -33,35 +33,15 @@ session_start();
            echo 'You do not have permission to veiw this site'; 
         }
         break;
-    case 'delete':
-        echo '
-        <p>Are you sure you want to delete this user?</p>
-        <p>There is no going back<p>
-        <a href="admin.php">No</a>
-        <a href="commit.php?action=delete&id=' . $_GET['id'] . '">Yes</a>';
-        break;
     case 'vote':
-        $query = 'SELECT user_name,user_pass,security_level FROM users where user_id=' . $_GET['id'];
-        $result = mysql_query($query, $db) or die(mysql_error($db));
-        extract(mysql_fetch_assoc($result));
-?>
-        <form action="commit.php?action=edit&id=<?php echo $_GET['id']?>" method="post"> 
-            <input type="text" name="username" value="<?php echo $user_name; ?>">
-            Password:
-            <input type="password" name="password" value="<?php echo $user_pass; ?>">
-            Security Level
-            <select name="security_level">
-<?php
-        for($total=1;$total<=5;$total++){
-            echo '<option value="' . $total . '"'; 
-            if($total==$security_level) {
-                echo ' selected';
-            }
-           echo '>' . $total . '</option>';
-        }
-?>
-            <input type="submit" name="submit" value="Edit User">
-<?php
+        $query = 'UPDATE elect SET 
+            voter_vote ="' . $_POST['cand'] . '"
+            WHERE voter_name = "' . $_SESSION['name'] . '"';
+        mysql_query($query, $db) or die(mysql_error($db));
+        header("Location: result.php");
+        break;
+    case 'result':
+        header("Location: result.php?action=result");
         break;
     }
 ?>

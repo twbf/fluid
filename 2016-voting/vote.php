@@ -7,7 +7,7 @@ $db = mysql_connect('localhost','root', 'abcdef')or die('fail');
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="home-css.css">
+        <link rel="stylesheet" type="text/css" href="css.css">
     </head>
     <body>
         <h1>2016 Bueler-Faudree Presidential Voting</h1>
@@ -30,16 +30,20 @@ $db = mysql_connect('localhost','root', 'abcdef')or die('fail');
                 ?>
                 <form action="change.php?action=vote" method="post">
                     <input type="radio" name="cand" value="Vera Bueler">Vera Bueler
-                    <input type="radio" name="cand" value="Micah Faudree">Micah Woodward
+                    <input type="radio" name="cand" value="Micah Faudree">Micah Faudree
+                    <input type="radio" name="cand" value="Dahlia Woodward">Dahlia Woodward
+                    <input type="hidden" name="id" value="<?php echo $_SESSION['name']; ?>">
                     <input type="submit" name="vote" value="Vote">
                 </form>
                 <?php
                 if($_SESSION['securityLevel']==1){
                     echo '<br>
+                    <a href="command-mysql.php">Command MySQL</a>
+                    <br>
                     <a href="change.php?action=add">Add Voter</a>
-<br>
-                    echo '<a href="change.php?action=results">Election Results</a>';
-                    echo '<
+                    <br>
+                    <a href="change.php?action=result">Election Results</a>
+                    <br>';
                     $query = 'SELECT voter_name,voter_birth
                         FROM
                             elect';

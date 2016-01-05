@@ -21,14 +21,17 @@
            $securityLevel .= $value;
        }
     }
-    if(isset($_SESSION['username'])){
-        $_SESSION['securityLevel'] = $securityLevel;
+    $_SESSION['securityLevel'] = $securityLevel;
+    if(isset($_SESSION['securityLevel'])){
         echo '<p>Thank you for signing in '. $_SESSION['username'] . '.</a>';
         
         if($_SESSION['securityLevel']==5){
             echo '<a href="admin.php">Administration Page</a>';
         }
-    } else {
+    } elseif(isset($_SESSION['username'])){
+        echo 'You either supplied the wrong credintials or you are not a user and need to registar';
+    } 
+    else {
 ?>
 <form action="index.php" method="post">
   Username:
@@ -36,6 +39,9 @@
   Password:
   <input type="password" name="password">
   <input type="submit" value="Sign In">
+</form>
+<form action="index.php" method="post">
+  <input type="submit" value="Registar">
 </form>
 <?php
 }

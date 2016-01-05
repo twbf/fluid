@@ -1,7 +1,5 @@
 <?php
 session_start();
-
-    if ($_SESSION['securityLevel']==5){
     
     //Connect To Server
     $db = mysql_connect('localhost','root', 'abcdef')or die('fail');
@@ -13,6 +11,7 @@ session_start();
     </head>
     <body>
 <?php
+    if ($_SESSION['securityLevel']==5){
     switch($_GET['action']) {
     case 'add':
         //Making Form Information MYSQL friendly
@@ -49,6 +48,11 @@ session_start();
      }else{
        echo 'You do not have permission to veiw this site'; 
     }
+#    switch($_GET['action']) {
+#        case 'adduser':
+#            echo 'gfhj';
+#            break:
+#    }
 ?>
         
     </body>

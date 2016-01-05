@@ -7,7 +7,7 @@ $db = mysql_connect('localhost','root', 'abcdef')or die('fail');
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="home-css.css">
+        <link rel="stylesheet" type="text/css" href="css.css">
     </head>
     <body>
         <h1>2016 Bueler-Faudree Presidential Voting</h1>
@@ -25,8 +25,6 @@ $db = mysql_connect('localhost','root', 'abcdef')or die('fail');
                 ?>
                 <input type="submit" value="Sign In">
             </form>
-            <h2>Temporary</h2>
-            <a href="command-mysql.php">Command MySQL</a>
         </div>
     </body>
 </html>

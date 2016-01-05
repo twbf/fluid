@@ -12,6 +12,7 @@ session_start();
         <title>Committ Changes</title>
     </head>
     <body>
+    <h1>2016 Bueler-Faudree Presidential Voting</h1>
 <?php
     switch($_GET['action']) {
     case 'add':
@@ -26,26 +27,30 @@ session_start();
          echo '<p>New User Successfully Added</p>
                <a href="vote.php">Back To Administrator Console</a>';
          break;
-     case 'delete':
-        $id = $_GET['id'];
-        $query = 'DELETE FROM users WHERE ' . $id . '=user_id';
-        mysql_query($query, $db) or die(mysql_error($db));
-        echo '<p>User with the id ' . $id . ' succesfully deleted</p>
-              <a href="admin.php">Back To Administrator Console</a>';
-        break;
     case 'vote':
         $id = $_GET['id'];
-        $query = 'UPDATE users SET 
-            user_name ="' . $_POST['username'] . '",
-            user_pass =' . $_POST['password'] . ',
-            security_level =' . $_POST['security_level'] . '
-            WHERE user_id = ' . $id;
-        mysql_query($query, $db) or die(mysql_error($db));
-        echo '<p>User with the id ' . $id . ' succesfully edited</p>
-              <a href="admin.php">Back To Administrator Console</a>';
-     }
-     }else{
-       echo 'You do not have permission to veiw this site'; 
+        
+        echo '<p>Thank you for voting.</p>
+              <p>Have a great day!</p>
+              <a href="index.php">Back Sign-In</a>';
+        break;
+    case 'result':
+        $query = 'SELECT voter_vote
+                        FROM
+                            elect ORDER BY voter_birth DESC';
+        $result = mysql_query($query, $db) or die(mysql_error($db));
+        echo '<table class="admin">';
+        while ($row = mysql_fetch_assoc($result)) {
+            echo '<tr>';
+            foreach ($row as $value) {
+                echo '<td>' . $value . '</td>';
+            }
+        }
+        break;
+    }
+    
+    }else{
+    echo 'You do not have permission to veiw this site'; 
     }
 ?>
         
