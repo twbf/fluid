@@ -65,12 +65,6 @@ session_start();
     }else{
        echo 'You do not have permission to veiw this site'; 
     }
-    
-    switch($_GET['action']) {
-        case 'adduser':
-            echo 'gfhj';
-            break:
-    }
 ?>
     </body>
 </html>

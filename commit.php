@@ -21,7 +21,7 @@ session_start();
         //Query
         $query = 'INSERT INTO users (user_name, user_pass, security_level)
             VALUES (' . $username . ',
-                ' . $password . ',
+                PASSWORD("' . mysql_real_escape_string($password, $db) .  '"),
                 ' . $security_level . ')';
          mysql_query($query, $db) or die(mysql_error($db));
          echo '<p>New User Successfully Added</p>
@@ -48,11 +48,6 @@ session_start();
      }else{
        echo 'You do not have permission to veiw this site'; 
     }
-#    switch($_GET['action']) {
-#        case 'adduser':
-#            echo 'gfhj';
-#            break:
-#    }
 ?>
         
     </body>

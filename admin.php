@@ -1,6 +1,6 @@
 <?php
 session_start();
-    echo '<link rel="stylesheet" type="text/css" href="home-css.css">';
+    include 'home-same.php';
     $db = mysql_connect('localhost','root', 'abcdef')or die('fail');
     mysql_select_db('admin', $db) or die(mysql_error($db));
     $query = 'SELECT *
