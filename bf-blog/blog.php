@@ -15,19 +15,27 @@ session_start();
     if($_SESSION['user_auth']>=1){
         switch($_GET['action']) {
             case 'view':
-                echo 'Their are currently no posts';
+                $query = 'SELECT post_title, post_content, post_date FROM post_word';
+                $sql = mysql_query($query, $db) or die(mysql_error($db));
+                while ($row = mysql_fetch_assoc($sql)) {
+                    echo '<h2>'. $row['post_title'] . '</h2>';
+                    echo '<p>'. $row['post_content'] . '</p>';
+                    echo '<p>'. $row['post_date'] . '</p>';
+                }
+                echo $posts;
+                echo '<br>';
                 echo '<a href="blog.php?action=post">Post</a>';
                 break;
             case 'post':
                 ?>
-                <form action="blog.php" method="post">
-                  Title:
-                  <input type="text" name="username">
-                  Body:
-                  <textarea rows="4" cols="50">
+                <form action="transaction.php?action=post" method="post">
+                  <p>Title:</p>
+                  <input type="text" name="title">
+                  <p>Body:</p>
+                  <textarea rows="4" cols="50" name="content">
                     
                   </textarea>
-                  <input type="submit" value="Sign In">
+                  <input type="submit" value="post">
                 </form>
                 <?php
                 break;
