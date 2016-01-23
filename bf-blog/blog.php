@@ -15,6 +15,12 @@ session_start();
     if($_SESSION['user_auth']>=1){
         switch($_GET['action']) {
             case 'view':
+                echo '<br>';
+                echo '<a href="blog.php?action=post">Post</a>';
+                if($_SESSION['user_auth']==5){
+                    echo '<br>';
+                    echo '<a href="blog.php?action=admin">Admin</a>';
+                }
                 $query = 'SELECT post_title, post_content, post_date FROM post_word';
                 $sql = mysql_query($query, $db) or die(mysql_error($db));
                 while ($row = mysql_fetch_assoc($sql)) {
@@ -23,8 +29,6 @@ session_start();
                     echo '<p>'. $row['post_date'] . '</p>';
                 }
                 echo $posts;
-                echo '<br>';
-                echo '<a href="blog.php?action=post">Post</a>';
                 break;
             case 'post':
                 ?>
@@ -38,6 +42,20 @@ session_start();
                   <input type="submit" value="post">
                 </form>
                 <?php
+                break;
+            case 'admin':
+                if($_SESSION['user_auth']==5){
+                    $query = 'SELECT user_id, user_name, user_auth FROM users';
+                    $sql = mysql_query($query, $db) or die(mysql_error($db));
+                    echo '<table>';
+                    while ($row = mysql_fetch_assoc($sql)) {
+                        echo '<tr>';
+                        foreach ($row as $value) {
+                            echo '<td>' . $value . '</td>';
+                        }
+                    }
+                    echo '</table>';
+                }
                 break;
         }
     }elseif($_SESSION['user_auth']=0){
