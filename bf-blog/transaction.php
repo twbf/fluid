@@ -20,6 +20,8 @@ session_start();
                 
                 header("Location: blog.php?action=view");
                 break;
+            case 'delete'
+                break;
         }
     }
 ?>

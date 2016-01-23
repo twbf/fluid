@@ -17,6 +17,8 @@ session_start();
             case 'view':
                 echo '<br>';
                 echo '<a href="blog.php?action=post">Post</a>';
+                echo '<br>';
+                echo '<a href="index.php">Sign Out</a>';
                 if($_SESSION['user_auth']==5){
                     echo '<br>';
                     echo '<a href="blog.php?action=admin">Admin</a>';
@@ -45,14 +47,30 @@ session_start();
                 break;
             case 'admin':
                 if($_SESSION['user_auth']==5){
+                    echo '<br>';
+                    echo '<a href="blog.php?action=view">Home</a>';
                     $query = 'SELECT user_id, user_name, user_auth FROM users';
                     $sql = mysql_query($query, $db) or die(mysql_error($db));
+                    echo '<h2>Posts</h2>';
                     echo '<table>';
                     while ($row = mysql_fetch_assoc($sql)) {
                         echo '<tr>';
                         foreach ($row as $value) {
                             echo '<td>' . $value . '</td>';
                         }
+                        echo'<td><a href="transaction.php?action=delete&what=user&id=' . $row['user_id'] . '">Delete</a></td>';
+                    }
+                    echo '</table>';
+                    $query = 'SELECT post_word_id, post_title, post_date, post_user_id FROM post_word';
+                    $sql = mysql_query($query, $db) or die(mysql_error($db));
+                    echo '<h2>Posts</h2>';
+                    echo '<table>';
+                    while ($row = mysql_fetch_assoc($sql)) {
+                        echo '<tr>';
+                        foreach ($row as $value) {
+                            echo '<td>' . $value . '</td>';
+                        }
+                        echo'<td><a href="transaction.php?action=delete&what=user&id=' . $row['post_word_id'] . '">Delete</a></td>';
                     }
                     echo '</table>';
                 }
