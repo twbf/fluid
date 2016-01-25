@@ -51,7 +51,7 @@ session_start();
                     echo '<a href="blog.php?action=view">Home</a>';
                     $query = 'SELECT user_id, user_name, user_auth FROM users';
                     $sql = mysql_query($query, $db) or die(mysql_error($db));
-                    echo '<h2>Posts</h2>';
+                    echo '<h2>Users</h2>';
                     echo '<table>';
                     while ($row = mysql_fetch_assoc($sql)) {
                         echo '<tr>';
@@ -70,7 +70,7 @@ session_start();
                         foreach ($row as $value) {
                             echo '<td>' . $value . '</td>';
                         }
-                        echo'<td><a href="transaction.php?action=delete&what=user&id=' . $row['post_word_id'] . '">Delete</a></td>';
+                        echo'<td><a href="transaction.php?action=delete&what=post&id=' . $row['post_word_id'] . '">Delete</a></td>';
                     }
                     echo '</table>';
                 }
