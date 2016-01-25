@@ -26,11 +26,10 @@ session_start();
                 $query = 'SELECT post_title, post_content, post_date FROM post_word';
                 $sql = mysql_query($query, $db) or die(mysql_error($db));
                 while ($row = mysql_fetch_assoc($sql)) {
-                    echo '<h2>'. $row['post_title'] . '</h2>';
+                    echo '<div class="post"><h2>'. $row['post_title'] . '</h2>';
                     echo '<p>'. $row['post_content'] . '</p>';
-                    echo '<p>'. $row['post_date'] . '</p>';
+                    echo '<p>'. $row['post_date'] . '</p></div>';
                 }
-                echo $posts;
                 break;
             case 'post':
                 ?>

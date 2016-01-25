@@ -23,21 +23,22 @@ session_start();
             case 'delete':
                 switch($_GET['what']) {
                     case 'user':
-                        $id = $_GET['id'];
-                        $query = 'DELETE FROM users WHERE ' . $id . '=user_id';
-                        mysql_query($query, $db) or die(mysql_error($db));
-                        echo '<p>User with the id ' . $id . ' succesfully deleted</p>
-                              <a href="blog.php?action=admin">Back To Administrator Console</a>';
+                        $database = 'users';
+                        $databaseid = 'user';
+                        $responce = 'User';
                         break;
                         
                     case 'post':
-                        $id = $_GET['id'];
-                        $query = 'DELETE FROM post_word WHERE ' . $id . '=post_word_id';
-                        mysql_query($query, $db) or die(mysql_error($db));
-                        echo '<p>Post with the id ' . $id . ' succesfully deleted</p>
-                              <a href="blog.php?action=admin">Back To Administrator Console</a>';
+                        $database = 'post_word';
+                        $databaseid = 'post_word';
+                        $responce = 'Post';
                         break;
                 }
+                $id = $_GET['id'];
+                $query = 'DELETE FROM ' . $database . ' WHERE ' . $id . '=' . $databaseid . '_id';
+                mysql_query($query, $db) or die(mysql_error($db));
+                echo '<p>' .$responce. ' with the id ' . $id . ' succesfully deleted</p>
+                      <a href="blog.php?action=admin">Back To Administrator Console</a>';
                 break;
         }
     }
