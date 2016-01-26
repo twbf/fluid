@@ -46,12 +46,10 @@ session_start();
                 break;
             case 'admin':
                 if($_SESSION['user_auth']==5){
-                    echo '<br>';
-                    echo '<a href="blog.php?action=view">Home</a>';
+                    echo '<br><a href="blog.php?action=view">Home</a>';
                     $query = 'SELECT user_id, user_name, user_auth FROM users';
                     $sql = mysql_query($query, $db) or die(mysql_error($db));
-                    echo '<h2>Users</h2>';
-                    echo '<table>';
+                    echo '<br><a href="blog.php?action=add">Add User</a><h2>Users</h2><table>';
                     while ($row = mysql_fetch_assoc($sql)) {
                         echo '<tr>';
                         foreach ($row as $value) {
@@ -73,6 +71,27 @@ session_start();
                     }
                     echo '</table>';
                 }
+                break;
+            case 'add':
+?>
+                <form action="transaction.php?action=add" method="post">
+                    Username:
+                    <input type="text" name="name">
+                    Password:
+                    <input type="password" name="pass">
+<?php
+                if($_SESSION['user_auth']==5){
+?>
+                    Security Level
+                    <select name="auth">
+<?php
+                    for($total=1;$total<=5;$total++){
+                        echo '<option value="' . $total . '">' . $total . '</option>';
+                    }
+                }
+                echo'
+                <input type="submit" value="Add User">
+                </form>';
                 break;
         }
     }elseif($_SESSION['user_auth']=0){

@@ -29,7 +29,7 @@ session_start();
             if (isset($_SESSION['user_auth'])){
                 header("Location: blog.php?action=view");
             }else{
-                echo 'You either supplied the wrong credintials or you are not a user and need to registar';
+                echo 'You either supplied the wrong credintials or you are not a user and need to <a href="blog.php?action=add">registar</a>';
             }
         }else{
     ?>
@@ -39,6 +39,9 @@ session_start();
               Password:
               <input type="password" name="password">
               <input type="submit" value="Sign In">
+            </form>
+            <form action="blog.php?action=add" method="post">
+              <input type="submit" value="Registar">
             </form>
     <?php
         }

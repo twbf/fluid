@@ -25,21 +25,27 @@ session_start();
                     case 'user':
                         $database = 'users';
                         $databaseid = 'user';
-                        $responce = 'User';
                         break;
                         
                     case 'post':
                         $database = 'post_word';
                         $databaseid = 'post_word';
-                        $responce = 'Post';
                         break;
                 }
                 $id = $_GET['id'];
                 $query = 'DELETE FROM ' . $database . ' WHERE ' . $id . '=' . $databaseid . '_id';
                 mysql_query($query, $db) or die(mysql_error($db));
-                echo '<p>' .$responce. ' with the id ' . $id . ' succesfully deleted</p>
-                      <a href="blog.php?action=admin">Back To Administrator Console</a>';
+                header("Location: blog.php?action=admin");
                 break;
+            case 'add':
+                $username = '"' . $_POST['name'] . '"';
+                $password = '"' . md5($_POST['pass']) . '"';
+                $auth = '"' . $_POST['auth'] . '"';
+                $query = 'INSERT INTO users (user_id, user_name, user_pass, user_auth)
+                    VALUES (NULL,' . $username . ',' . $password . ',' . $auth . ')';
+                 mysql_query($query, $db) or die(mysql_error($db));
+                 header("Location: blog.php?action=admin");
+                 break;
         }
     }
 ?>
