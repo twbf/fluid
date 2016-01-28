@@ -1,0 +1,10 @@
+
+.post{
+    width:calc(100% / 5);
+    float:left;
+    padding-right:10px;
+}
+
+.post p:last-child{
+    font-size:.75em;
+}
