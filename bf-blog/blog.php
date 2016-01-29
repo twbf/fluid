@@ -33,13 +33,25 @@ session_start();
                 }
                 break;
             case 'post':
+                $edit = $_GET['edit-post'];
+                $id = $_GET['id'];
+                if($_SESSION['user_auth']==5){
+                    if($edit=='edit'){
+                        $query = 'SELECT post_title, post_content FROM post_word WHERE post_word_id =' . $id;
+                        $sql = mysql_query($query, $db) or die(mysql_error($db));
+                        while ($row = mysql_fetch_assoc($sql)) {
+                            $title=$row['post_title'];
+                            $content=$row['post_content'];
+                        }
+                    }
+                }
                 ?>
-                <form action="transaction.php?action=post" method="post">
+                <form action="transaction.php?action=post<?php if($edit=='edit'){echo '&edit-post=edit&id='.$id;}?>" method="post">
                   <p>Title:</p>
-                  <input type="text" name="title">
+                  <input type="text" name="title" value="<?php echo $title;?>">
                   <p>Body:</p>
                   <textarea rows="4" cols="50" name="content">
-                    
+                    <?php echo $content;?>
                   </textarea>
                   <input type="submit" value="post">
                 </form>
@@ -68,7 +80,7 @@ session_start();
                         foreach ($row as $value) {
                             echo '<td>' . $value . '</td>';
                         }
-                        echo'<td><a href="transaction.php?action=delete&what=post&id=' . $row['post_word_id'] . '">Delete</a></td>';
+                        echo'<td><a href="transaction.php?action=delete&what=post&id=' . $row['post_word_id'] . '">Delete</a></td><td><a href="blog.php?action=post&edit-post=edit&id='. $row['post_word_id'] . '">Edit</a></td>';
                     }
                     echo '</table>';
                 }

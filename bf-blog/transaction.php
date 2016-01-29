@@ -16,7 +16,14 @@ session_start();
                 }
                 
                 $query = 'INSERT INTO post_word (post_word_id, post_title, post_content, post_date, post_user_id) VALUES (NULL,"'. $_POST['title'] .'","'. $_POST['content'] .'",NULL,'. $user_id .')';
-    $auth = mysql_query($query, $db) or die(mysql_error($db));
+                if($_GET['edit-post']=='edit'){
+                    $query = 'UPDATE post_word SET
+                    post_title="' .$_POST['title']. '", 
+                    post_content="' .$_POST['content']. '", 
+                    post_date= NULL
+                    WHERE post_word_id=' .$_GET['id'];
+                }
+                $auth = mysql_query($query, $db) or die(mysql_error($db));
                 
                 header("Location: blog.php?action=view");
                 break;
