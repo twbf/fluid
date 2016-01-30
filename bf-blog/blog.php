@@ -99,19 +99,22 @@ session_start();
                     }
                 }
                 echo '<form action="transaction.php?action=add';
-                if($edit=='edit'){echo '&edit-user=edit&id='.$id;} 
-                echo '" method="post">Username:
-                    <input type="text" name="name" value="' . $name . '">
-                    Password:';
-                    if($edit=='edit'){echo '(please leave blank to not change password)';}
-                    echo'<input type="password" name="pass">';
+                if($edit=='edit'){
+                    echo '&edit-user=edit&id='.$id;
+                } 
+                echo '" method="post">Username:<input type="text" name="name" value="' . $name . '">Password:';
+                if($edit=='edit'){
+                    echo '(please leave blank to not change password)';
+                }
+                echo'<input type="password" name="pass">';
                 if($_SESSION['user_auth']==5){
-?>
-                    Security Level:
-                    <select name="auth">
-<?php
+                    echo 'Security Level:<select name="auth">';
                     for($total=1;$total<=5;$total++){
-                        echo '<option value="' . $total . '">' . $total . '</option>';
+                        echo '<option value="' . $total . '"';
+                        if($total==$auth) {
+                            echo ' selected';
+                        }
+                        echo '>' . $total . '</option>';
                     }
                 }
                 echo'

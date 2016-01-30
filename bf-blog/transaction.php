@@ -50,6 +50,14 @@ session_start();
                 $auth = '"' . $_POST['auth'] . '"';
                 $query = 'INSERT INTO users (user_id, user_name, user_pass, user_auth)
                     VALUES (NULL,' . $username . ',' . $password . ',' . $auth . ')';
+                if($_GET['edit-user']=='edit'){
+                    $query = 'UPDATE users SET
+                    user_name=' .$username. ',';
+                    if ($_POST['pass']==true){
+                        $query .= 'user_pass=' . $password . ',';
+                    }
+                    $query .= 'user_auth =' . $auth . 'WHERE user_id=' . $_GET['id'];
+                 }
                  mysql_query($query, $db) or die(mysql_error($db));
                  header("Location: blog.php?action=admin");
                  break;
