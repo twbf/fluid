@@ -68,7 +68,7 @@ session_start();
                         foreach ($row as $value) {
                             echo '<td>' . $value . '</td>';
                         }
-                        echo'<td><a href="transaction.php?action=delete&what=user&id=' . $row['user_id'] . '">Delete</a></td>';
+                        echo'<td><a href="transaction.php?action=delete&what=user&id=' . $row['user_id'] . '">Delete</a></td><td><a href="blog.php?action=add&edit-user=edit&id='. $row['user_id'] . '">Edit</a></td>';
                     }
                     echo '</table>';
                     $query = 'SELECT post_word_id, post_title, post_date, post_user_id FROM post_word';
@@ -86,16 +86,28 @@ session_start();
                 }
                 break;
             case 'add':
-?>
-                <form action="transaction.php?action=add" method="post">
-                    Username:
-                    <input type="text" name="name">
-                    Password:
-                    <input type="password" name="pass">
-<?php
+                $edit = $_GET['edit-user'];
+                $id = $_GET['id'];
+                if($_SESSION['user_auth']==5){
+                    if($edit=='edit'){
+                        $query = 'SELECT * FROM users WHERE user_id =' . $id;
+                        $sql = mysql_query($query, $db) or die(mysql_error($db));
+                        while ($row = mysql_fetch_assoc($sql)) {
+                            $name=$row['user_name'];
+                            $auth=$row['user_auth'];
+                        }
+                    }
+                }
+                echo '<form action="transaction.php?action=add';
+                if($edit=='edit'){echo '&edit-user=edit&id='.$id;} 
+                echo '" method="post">Username:
+                    <input type="text" name="name" value="' . $name . '">
+                    Password:';
+                    if($edit=='edit'){echo '(please leave blank to not change password)';}
+                    echo'<input type="password" name="pass">';
                 if($_SESSION['user_auth']==5){
 ?>
-                    Security Level
+                    Security Level:
                     <select name="auth">
 <?php
                     for($total=1;$total<=5;$total++){
