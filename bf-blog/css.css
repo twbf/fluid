@@ -14,14 +14,35 @@ body{
 h1,h2{
     font-family: 'Titillium Web', cursive;
 }
-
+h1{
+    font-size:2em;
+}
+nav ul li{
+    display:inline; 
+    padding-right:20px;
+}
+nav{
+}
 
 /*classes*/
+.header{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:#FA7858;
+}
+.content{
+    float:left;
+    width:100%;
+}
 
 .post{
+    border:2px solid #FA7858;
     width:calc(100% / 5.5);
     float:left;
-    padding-right:10px;
+    padding:5px;
+    margin:5px;
 }
 
 .post p:nth-child(3){

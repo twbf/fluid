@@ -11,15 +11,21 @@ session_start();
         <link rel="stylesheet" type="text/css" href="css.css">
     </head>
     <body>
-    <h1>Bueler-Faudree Blog</h1>
-    <nav>
-        <ul>
-            <li><a href="?action=view">Home</a></li>
-            <li><a href="?action=post">Post</a></li>
-            <li><a href="index.php">Sign Out</a></li>
-            <?php if($_SESSION['user_auth']==5){echo '<li><a href="?action=admin">Admin</a></li>';} ?>
-        </ul>
-    </nav>
+    <div class="header">
+        <h1>Bueler-Faudree Blog</h1>
+        <nav>
+            <ul>
+                <li><a href="?action=view">Home</a></li>
+                <li><a href="?action=post">Post</a></li>
+                <li><a href="index.php">Sign Out</a></li>
+                <?php if($_SESSION['user_auth']==5){echo '<li><a href="?action=admin">Admin</a></li>';} ?>
+            </ul>
+        </nav>
+<?php  
+        
+?>
+    </div>
+    <div class="content">
 <?php
     if($_SESSION['user_auth']>=1){
         switch($_GET['action']) {
@@ -119,7 +125,10 @@ session_start();
                 <input type="submit" value="Add User">
                 </form>';
                 break;
-        }
+            }
+?>
+            </div>
+<?php
     }elseif($_SESSION['user_auth']=0){
         echo'You are signed in, but you don\'t have the privilages to view the blog';
     }else{
