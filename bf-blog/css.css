@@ -1,3 +1,22 @@
+/*css.css*/
+
+
+/*@imports*/
+
+@import url(https://fonts.googleapis.com/css?family=Dancing+Script|Comfortaa|Titillium+Web|Raleway);
+
+
+/*tags*/
+body{
+    font-family: 'Raleway', cursive;
+}
+
+h1,h2{
+    font-family: 'Titillium Web', cursive;
+}
+
+
+/*classes*/
 
 .post{
     width:calc(100% / 5.5);
@@ -5,6 +24,6 @@
     padding-right:10px;
 }
 
-.post p:last-child{
+.post p:nth-child(3){
     font-size:.75em;
 }

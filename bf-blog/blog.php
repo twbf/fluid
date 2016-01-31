@@ -12,18 +12,18 @@ session_start();
     </head>
     <body>
     <h1>Bueler-Faudree Blog</h1>
+    <nav>
+        <ul>
+            <li><a href="?action=view">Home</a></li>
+            <li><a href="?action=post">Post</a></li>
+            <li><a href="index.php">Sign Out</a></li>
+            <?php if($_SESSION['user_auth']==5){echo '<li><a href="?action=admin">Admin</a></li>';} ?>
+        </ul>
+    </nav>
 <?php
     if($_SESSION['user_auth']>=1){
         switch($_GET['action']) {
             case 'view':
-                echo '<br>';
-                echo '<a href="blog.php?action=post">Post</a>';
-                echo '<br>';
-                echo '<a href="index.php">Sign Out</a>';
-                if($_SESSION['user_auth']==5){
-                    echo '<br>';
-                    echo '<a href="blog.php?action=admin">Admin</a>';
-                }
                 $query = 'SELECT * FROM post_word';
                 $sql = mysql_query($query, $db) or die(mysql_error($db));
                 while ($row = mysql_fetch_assoc($sql)) {
@@ -31,7 +31,7 @@ session_start();
                     echo '<p>'. $row['post_content'] . '</p>';
                     echo '<p>'. $row['post_date'] . '</p>';
                     if($_SESSION['user_id']==$row['post_user_id']){
-                        echo'<p><a href="blog.php?action=post&edit-post=edit&id=' . $row['post_word_id'] . '">Edit</a></p></div>';
+                        echo'<p><a href="?action=post&edit-post=edit&id=' . $row['post_word_id'] . '">Edit</a></p></div>';
                     }else{
                         echo '</div>';
                     }
@@ -50,30 +50,23 @@ session_start();
                         }
                     }
                 }
-                ?>
-                <form action="transaction.php?action=post<?php if($edit=='edit'){echo '&edit-post=edit&id='.$id;}?>" method="post">
-                  <p>Title:</p>
-                  <input type="text" name="title" value="<?php echo $title;?>">
-                  <p>Body:</p>
-                  <textarea rows="4" cols="50" name="content">
-                    <?php echo $content;?>
-                  </textarea>
-                  <input type="submit" value="post">
-                </form>
-                <?php
+                echo '<form action="transaction.php?action=post';
+                if($edit=='edit'){
+                    echo '&edit-post=edit&id='.$id;
+                }
+                echo '" method="post"><p>Title:</p><input type="text" name="title" value="' . $title . '"><p>Body:</p><textarea rows="4" cols="50" name="content">' . $content . '</textarea><input type="submit" value="post"></form>';
                 break;
             case 'admin':
                 if($_SESSION['user_auth']==5){
-                    echo '<br><a href="blog.php?action=view">Home</a>';
                     $query = 'SELECT user_id, user_name, user_auth FROM users';
                     $sql = mysql_query($query, $db) or die(mysql_error($db));
-                    echo '<br><a href="blog.php?action=add">Add User</a><h2>Users</h2><table>';
+                    echo '<br><a href="?action=add">Add User</a><h2>Users</h2><table>';
                     while ($row = mysql_fetch_assoc($sql)) {
                         echo '<tr>';
                         foreach ($row as $value) {
                             echo '<td>' . $value . '</td>';
                         }
-                        echo'<td><a href="transaction.php?action=delete&what=user&id=' . $row['user_id'] . '">Delete</a></td><td><a href="blog.php?action=add&edit-user=edit&id='. $row['user_id'] . '">Edit</a></td>';
+                        echo'<td><a href="transaction.php?action=delete&what=user&id=' . $row['user_id'] . '">Delete</a></td><td><a href="?action=add&edit-user=edit&id='. $row['user_id'] . '">Edit</a></td>';
                     }
                     echo '</table>';
                     $query = 'SELECT post_word_id, post_title, post_date, post_user_id FROM post_word';
@@ -85,7 +78,7 @@ session_start();
                         foreach ($row as $value) {
                             echo '<td>' . $value . '</td>';
                         }
-                        echo'<td><a href="transaction.php?action=delete&what=post&id=' . $row['post_word_id'] . '">Delete</a></td><td><a href="blog.php?action=post&edit-post=edit&id='. $row['post_word_id'] . '">Edit</a></td>';
+                        echo'<td><a href="transaction.php?action=delete&what=post&id=' . $row['post_word_id'] . '">Delete</a></td><td><a href="?action=post&edit-post=edit&id='. $row['post_word_id'] . '">Edit</a></td>';
                     }
                     echo '</table>';
                 }
