@@ -17,8 +17,17 @@ session_start();
                     WHERE post_word_id=' .$_GET['id'];
                 }
                 $auth = mysql_query($query, $db) or die(mysql_error($db));
-                
-                header("Location: blog.php?action=view");
+                $_FILE['picture']['tmp_name'] == "none";
+                if(!$_FILE['picture']['tmp_name']=="none"){
+                    echo'gsdhfsj';
+                    $dest ='/var/www/html/fluid/bf-blog/images/' . $_FILE['picture']['name'];
+                    $tmp =  $_FILE['picture']['tmp_name'];
+                    move_uploaded_file($tmp,$dest);
+                }
+                echo $_FILE['picture']['tmp_name'];
+                echo $_FILE['picture']['name'];
+                echo 'fsdhsjk';
+                //header("Location: blog.php?action=view");
                 break;
             case 'delete':
                 switch($_GET['what']) {

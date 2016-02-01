@@ -70,7 +70,7 @@ session_start();
                 if($edit=='edit'){
                     echo '&edit-post=edit&id='.$id;
                 }
-                echo '" method="post"><p>Title:</p><input type="text" name="title" value="' . $title . '"><p>Body:</p><textarea rows="4" cols="50" name="content">' . $content . '</textarea><input type="submit" value="post"></form>';
+                echo '" method="post" enctype="mutipart/form-data" ><p>Title:</p><input type="text" name="title" value="' . $title . '"><p>Body:</p><textarea rows="4" cols="50" name="content">' . $content . '</textarea><p>If you would like a picture to appear with your post please select one</p><input type="file" name="picture" value="Upload Picture"><input type="submit" value="post"></form>';
                 break;
             case 'admin':
                 if($_SESSION['user_auth']==5){
