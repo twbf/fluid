@@ -17,17 +17,18 @@ session_start();
                     WHERE post_word_id=' .$_GET['id'];
                 }
                 $auth = mysql_query($query, $db) or die(mysql_error($db));
-                $_FILE['picture']['tmp_name'] == "none";
-                if(!$_FILE['picture']['tmp_name']=="none"){
-                    echo'gsdhfsj';
-                    $dest ='/var/www/html/fluid/bf-blog/images/' . $_FILE['picture']['name'];
-                    $tmp =  $_FILE['picture']['tmp_name'];
+                if($_FILES['picture']['tmp_name']=="none"){
+                } else {
+                    $dest ='images/' . $_FILES['picture']['name'];
+                    $tmp =  $_FILES['picture']['tmp_name'];
                     move_uploaded_file($tmp,$dest);
+                    $query = 'INSERT INTO post_picture (post_picture_id, picture_location, picture_user_id) VALUES (NULL,"'. $_FILES['picture']['name'] .'",'. $user_id .')';
+                    $auth = mysql_query($query, $db) or die(mysql_error($db));
+                    $query = 'INSERT INTO post (post_id, picture_word_id, picture_picture_id) VALUES (NULL,"'. $_FILES['picture']['name'] .'",'. $user_id .')';
+                    $auth = mysql_query($query, $db) or die(mysql_error($db));
+                    
                 }
-                echo $_FILE['picture']['tmp_name'];
-                echo $_FILE['picture']['name'];
-                echo 'fsdhsjk';
-                //header("Location: blog.php?action=view");
+                header("Location: blog.php?action=view");
                 break;
             case 'delete':
                 switch($_GET['what']) {
