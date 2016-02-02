@@ -24,7 +24,18 @@ session_start();
                     move_uploaded_file($tmp,$dest);
                     $query = 'INSERT INTO post_picture (post_picture_id, picture_location, picture_user_id) VALUES (NULL,"'. $_FILES['picture']['name'] .'",'. $user_id .')';
                     $auth = mysql_query($query, $db) or die(mysql_error($db));
-                    $query = 'INSERT INTO post (post_id, picture_word_id, picture_picture_id) VALUES (NULL,"'. $_FILES['picture']['name'] .'",'. $user_id .')';
+                    $query = 'SELECT post_word_id FROM post_word WHERE post_title ="' . $_POST['title'] . '"';
+                    $sql = mysql_query($query, $db) or die(mysql_error($db));
+                    while ($row = mysql_fetch_assoc($sql)) {
+                        $postword=$row['post_word_id'];
+                    }
+                    $query = 'SELECT post_picture_id FROM post_picture WHERE picture_location ="' . $_FILES['picture']['name'] . '"';
+                    $sql = mysql_query($query, $db) or die(mysql_error($db));
+                    while ($row = mysql_fetch_assoc($sql)) {
+                        $postpicture=$row['post_word_id'];
+                    }
+                    
+                    $query = 'INSERT INTO post (post_id, picture_word_id, picture_picture_id) VALUES (NULL,'. $postword .','. $postpicture .')';
                     $auth = mysql_query($query, $db) or die(mysql_error($db));
                     
                 }
