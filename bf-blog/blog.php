@@ -30,7 +30,7 @@ session_start();
     if($_SESSION['user_auth']>=1){
         switch($_GET['action']) {
             case 'view':
-                $query = 'SELECT * FROM post_word';
+                $query = 'SELECT * FROM post_word ORDER BY post_date DESC';
                 $sql = mysql_query($query, $db) or die(mysql_error($db));
                 while ($row = mysql_fetch_assoc($sql)) {
                     echo '<div class="post">';
@@ -40,7 +40,7 @@ session_start();
                         $query = 'SELECT picture_location FROM post_picture WHERE post_picture_id=' . $row1['post_picture_id'];
                         $mysql1 = mysql_query($query, $db) or die(mysql_error($db));
                         while ($row2 = mysql_fetch_assoc($mysql1)) {
-                            echo '<img src="images/' . $row2['picture_location'] . '">';
+                            echo '<img src="images/' . $row2['picture_location'] . ' " width="200px">';
                         }
                     }
                     echo '<h2>'. $row['post_title'] . '</h2>';
