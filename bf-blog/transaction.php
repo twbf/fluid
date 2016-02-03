@@ -28,16 +28,6 @@ session_start();
                     $auth = mysql_query($query, $db) or die(mysql_error($db));
                     $query = 'SET @post_picture_id = LAST_INSERT_ID()';
                     $auth = mysql_query($query, $db) or die(mysql_error($db));
-#                    $query = 'SELECT post_word_id FROM post_word WHERE post_title ="' . $_POST['title'] . '"';
-#                    $sql = mysql_query($query, $db) or die(mysql_error($db));
-#                    while ($row = mysql_fetch_assoc($sql)) {
-#                        $postword=$row['post_word_id'];
-#                    }
-#                    $query = 'SELECT post_picture_id FROM post_picture WHERE picture_location ="' . $_FILES['picture']['name'] . '"';
-#                    $sql = mysql_query($query, $db) or die(mysql_error($db));
-#                    while ($row = mysql_fetch_assoc($sql)) {
-#                        $postpicture=$row['post_word_id'];
-#                    }
                     
                     $query = 'INSERT INTO post (post_id, post_word_id, post_picture_id) VALUES (NULL,@post_word_id,@post_picture_id)';
                     $auth = mysql_query($query, $db) or die(mysql_error($db));

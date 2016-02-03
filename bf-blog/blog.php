@@ -43,7 +43,7 @@ session_start();
                             echo '<img src="images/' . $row2['picture_location'] . ' " width="200px">';
                         }
                     }
-                    echo '<h2>'. $row['post_title'] . '</h2>';
+                    echo '<h2><a href="?action=bigview&id=' .$row['post_word_id']. '">'. $row['post_title'] . '</a></h2>';
                     echo '<p>'. $row['post_content'] . '</p>';
                     echo '<p>'. $row['post_date'] . '</p>';
                     if($_SESSION['user_id']==$row['post_user_id']){
