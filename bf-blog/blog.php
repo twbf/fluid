@@ -21,9 +21,6 @@ session_start();
                 <?php if($_SESSION['user_auth']==5){echo '<li><a href="?action=admin">Admin</a></li>';} ?>
             </ul>
         </nav>
-<?php  
-        
-?>
     </div>
     <div class="content">
 <?php
@@ -45,7 +42,31 @@ session_start();
                     }
                     echo '<h2><a href="?action=bigview&id=' .$row['post_word_id']. '">'. $row['post_title'] . '</a></h2>';
                     echo '<p>'. $row['post_content'] . '</p>';
-                    echo '<p>'. $row['post_date'] . '</p>';
+                    echo '<p class="small">'. $row['post_date'] . '</p>';
+                    if($_SESSION['user_id']==$row['post_user_id']){
+                        echo'<p><a href="?action=post&edit-post=edit&id=' . $row['post_word_id'] . '">Edit</a></p>'; 
+                    }  
+                    
+                    echo '</div>';
+                }
+                break;
+            case 'bigview':
+                $query = 'SELECT * FROM post_word WHERE post_word_id=' . $_GET['id'];
+                $sql = mysql_query($query, $db) or die(mysql_error($db));
+                while ($row = mysql_fetch_assoc($sql)) {
+                    echo '<div class="post">';
+                    $query = 'SELECT post_picture_id FROM post WHERE post_word_id=' . $row['post_word_id'];
+                    $mysql = mysql_query($query, $db) or die(mysql_error($db));
+                    while ($row1 = mysql_fetch_assoc($mysql)) {
+                        $query = 'SELECT picture_location FROM post_picture WHERE post_picture_id=' . $row1['post_picture_id'];
+                        $mysql1 = mysql_query($query, $db) or die(mysql_error($db));
+                        while ($row2 = mysql_fetch_assoc($mysql1)) {
+                            echo '<img src="images/' . $row2['picture_location'] . ' " width="200px">';
+                        }
+                    }
+                    echo '<h2>'. $row['post_title'] . '</h2>';
+                    echo '<p>'. $row['post_content'] . '</p>';
+                    echo '<p class="small">'. $row['post_date'] . '</p>';
                     if($_SESSION['user_id']==$row['post_user_id']){
                         echo'<p><a href="?action=post&edit-post=edit&id=' . $row['post_word_id'] . '">Edit</a></p>'; 
                     }  

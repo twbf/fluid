@@ -7,11 +7,21 @@ session_start();
 <!DOCTYPE html>
     <html lang="en">
     <head>
-        <link rel="stylesheet" type="text/css" href="css.css">
         <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="css.css">
     </head>
     <body>
-    <h1>Bueler-Faudree Blog</h1>
+    <div class="header">
+        <h1>Bueler-Faudree Blog</h1>
+        <nav>
+            <ul>
+                <li><a href="?action=view">Home</a></li>
+                <li><a href="?action=post">Post</a></li>
+                <li><a href="index.php">Sign Out</a></li>
+                <?php if($_SESSION['user_auth']==5){echo '<li><a href="?action=admin">Admin</a></li>';} ?>
+            </ul>
+        </nav>
+    </div>
     <?php
         if(isset($_POST['username'])){
         //getting variable's

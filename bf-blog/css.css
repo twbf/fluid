@@ -49,6 +49,6 @@ nav{
     margin:5px;
 }
 
-.post p:nth-child(3){
+.post .small{
     font-size:.75em;
 }
