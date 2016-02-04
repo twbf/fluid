@@ -25,21 +25,26 @@ session_start();
     <div class="content">
 <?php
     if($_SESSION['user_auth']>=1){
+        function getPicture($rowid){
+            global $db;
+            $query1 = 'SELECT post_picture_id FROM post WHERE post_word_id=' . $rowid;
+            $mysql = mysql_query($query1, $db) or die(mysql_error($db));
+            while ($row1 = mysql_fetch_assoc($mysql)) {
+                $query = 'SELECT picture_location FROM post_picture WHERE post_picture_id=' . $row1['post_picture_id'];
+                $mysql1 = mysql_query($query, $db) or die(mysql_error($db));
+                while ($row2 = mysql_fetch_assoc($mysql1)) {
+                    echo '<img src="images/' . $row2['picture_location'] . ' " width="200px">';
+                    return;
+                }
+            }
+        }
         switch($_GET['action']) {
             case 'view':
                 $query = 'SELECT * FROM post_word ORDER BY post_date DESC';
                 $sql = mysql_query($query, $db) or die(mysql_error($db));
                 while ($row = mysql_fetch_assoc($sql)) {
                     echo '<div class="post">';
-                    $query = 'SELECT post_picture_id FROM post WHERE post_word_id=' . $row['post_word_id'];
-                    $mysql = mysql_query($query, $db) or die(mysql_error($db));
-                    while ($row1 = mysql_fetch_assoc($mysql)) {
-                        $query = 'SELECT picture_location FROM post_picture WHERE post_picture_id=' . $row1['post_picture_id'];
-                        $mysql1 = mysql_query($query, $db) or die(mysql_error($db));
-                        while ($row2 = mysql_fetch_assoc($mysql1)) {
-                            echo '<img src="images/' . $row2['picture_location'] . ' " width="200px">';
-                        }
-                    }
+                    getPicture($row['post_word_id']);
                     echo '<h2><a href="?action=bigview&id=' .$row['post_word_id']. '">'. $row['post_title'] . '</a></h2>';
                     echo '<p>'. $row['post_content'] . '</p>';
                     echo '<p class="small">'. $row['post_date'] . '</p>';
@@ -55,15 +60,7 @@ session_start();
                 $sql = mysql_query($query, $db) or die(mysql_error($db));
                 while ($row = mysql_fetch_assoc($sql)) {
                     echo '<div class="post">';
-                    $query = 'SELECT post_picture_id FROM post WHERE post_word_id=' . $row['post_word_id'];
-                    $mysql = mysql_query($query, $db) or die(mysql_error($db));
-                    while ($row1 = mysql_fetch_assoc($mysql)) {
-                        $query = 'SELECT picture_location FROM post_picture WHERE post_picture_id=' . $row1['post_picture_id'];
-                        $mysql1 = mysql_query($query, $db) or die(mysql_error($db));
-                        while ($row2 = mysql_fetch_assoc($mysql1)) {
-                            echo '<img src="images/' . $row2['picture_location'] . ' " width="200px">';
-                        }
-                    }
+                    getPicture($row['post_word_id']);
                     echo '<h2>'. $row['post_title'] . '</h2>';
                     echo '<p>'. $row['post_content'] . '</p>';
                     echo '<p class="small">'. $row['post_date'] . '</p>';
