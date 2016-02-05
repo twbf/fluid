@@ -40,13 +40,14 @@ session_start();
                 $query = 'SELECT picture_location FROM post_picture WHERE post_picture_id=' . $row1['post_picture_id'];
                 $mysql1 = mysql_query($query, $db) or die(mysql_error($db));
                 while ($row2 = mysql_fetch_assoc($mysql1)) {
-                    echo '<img src="images/' . $row2['picture_location'] . ' " width="200px">';
+                    echo '<img src="images/' . $row2['picture_location'] . ' ">';
                     return;
                 }
             }
         }
         switch($_GET['action']) {
             case 'view':
+                echo '<div class="coll">';
                 $query = 'SELECT * FROM post_word ORDER BY post_date DESC';
                 $sql = mysql_query($query, $db) or die(mysql_error($db));
                 while ($row = mysql_fetch_assoc($sql)) {
@@ -60,6 +61,7 @@ session_start();
                     }  
                     echo '</div></a>';
                 }
+                echo '</div>';
                 break;
             case 'bigview':
                 $query = 'SELECT * FROM post_word WHERE post_word_id=' . $_GET['id'];
