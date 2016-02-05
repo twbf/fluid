@@ -141,13 +141,14 @@ session_start();
                 if($edit=='edit'){
                     echo '&edit-user=edit&id='.$id;
                 } 
-                echo '" method="post">Username:<input type="text" name="name" value="' . $name . '">Password:';
+                echo '" method="post"><p>Username:</p><input type="text" name="name" value="' . $name . '"><p>Password:';
                 if($edit=='edit'){
                     echo '(please leave blank to not change password)';
                 }
-                echo'<input type="password" name="pass">';
+                echo '</p>';
+                echo '<input type="password" name="pass">';
                 if($_SESSION['user_auth']==5){
-                    echo 'Security Level:<select name="auth">';
+                    echo '<p>Security Level:</p><select name="auth">';
                     for($total=1;$total<=5;$total++){
                         echo '<option value="' . $total . '"';
                         if($total==$auth) {
@@ -155,7 +156,12 @@ session_start();
                         }
                         echo '>' . $total . '</option>';
                     }
+                    echo '</select>';
                 }
+                echo '
+                <p>First Name:</p><input type="text" name="fname">
+                <p>Last Name:</p><input type="text" name="lname">
+                <p>Email:</p><input type="text" name="email">';
                 echo'
                 <input type="submit" value="Add User">
                 </form>';
