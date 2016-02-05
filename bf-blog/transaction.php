@@ -69,6 +69,10 @@ session_start();
                  mysql_query($query, $db) or die(mysql_error($db));
                  header("Location: blog.php?action=admin");
                  break;
+             case 'signout':
+                session_destroy();
+                header("Location: index.php");
+                break;
         }
     }
 ?>

@@ -1,8 +1,15 @@
 <?php
 session_start();
+    if($_SESSION['user_auth']>=1){
     require 'mysql-connect.inc.php';
     $db = mysql_connect(mysql_host,mysql_user,mysql_pass)or die('fail');
     mysql_select_db(mysql_database, $db) or die(mysql_error($db));
+    
+    $query = 'SELECT first, last FROM user_info WHERE user_id=' . $_SESSION['user_id'];
+    $mysql = mysql_query($query, $db) or die(mysql_error($db));
+    while ($row = mysql_fetch_assoc($mysql)) {
+        $fullName = $row['first'] .' '. $row['last'];
+    }
 ?>
 <!DOCTYPE html>
     <html lang="en">
@@ -17,14 +24,14 @@ session_start();
             <ul>
                 <li><a href="?action=view">Home</a></li>
                 <li><a href="?action=post">Post</a></li>
-                <li><a href="index.php">Sign Out</a></li>
+                <li><a href="transaction.php?action=signout">Sign Out</a></li>
                 <?php if($_SESSION['user_auth']==5){echo '<li><a href="?action=admin">Admin</a></li>';} ?>
+                <li><?php echo $fullName; ?></li>
             </ul>
         </nav>
     </div>
     <div class="content">
 <?php
-    if($_SESSION['user_auth']>=1){
         function getPicture($rowid){
             global $db;
             $query1 = 'SELECT post_picture_id FROM post WHERE post_word_id=' . $rowid;
@@ -43,16 +50,15 @@ session_start();
                 $query = 'SELECT * FROM post_word ORDER BY post_date DESC';
                 $sql = mysql_query($query, $db) or die(mysql_error($db));
                 while ($row = mysql_fetch_assoc($sql)) {
-                    echo '<div class="post">';
+                    echo '<a href="?action=bigview&id=' .$row['post_word_id']. '"><div class="post">';
                     getPicture($row['post_word_id']);
-                    echo '<h2><a href="?action=bigview&id=' .$row['post_word_id']. '">'. $row['post_title'] . '</a></h2>';
-                    echo '<p>'. $row['post_content'] . '</p>';
+                    echo '<h2>'. $row['post_title'] . '</h2>';
+                    echo '<p>'. substr($row['post_content'], 0, 100) . '...</p>';
                     echo '<p class="small">'. $row['post_date'] . '</p>';
                     if($_SESSION['user_id']==$row['post_user_id']){
                         echo'<p><a href="?action=post&edit-post=edit&id=' . $row['post_word_id'] . '">Edit</a></p>'; 
                     }  
-                    
-                    echo '</div>';
+                    echo '</div></a>';
                 }
                 break;
             case 'bigview':
@@ -67,7 +73,6 @@ session_start();
                     if($_SESSION['user_id']==$row['post_user_id']){
                         echo'<p><a href="?action=post&edit-post=edit&id=' . $row['post_word_id'] . '">Edit</a></p>'; 
                     }  
-                    
                     echo '</div>';
                 }
                 break;

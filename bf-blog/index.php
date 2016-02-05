@@ -29,21 +29,12 @@ session_start();
             $_SESSION['pass'] = $_POST['password'];
             $_SESSION['mysql_name']= '"'.$_SESSION['name'].'"';
             $_SESSION['mysql_pass'] = '"'.$_SESSION['pass'].'"';
-            $query = 'SELECT user_auth FROM users WHERE user_name = ' . $_SESSION['mysql_name'] . 'AND user_pass ="' . md5($_SESSION['pass']) . '"';
+            $query = 'SELECT user_auth, user_id FROM users WHERE user_name = ' . $_SESSION['mysql_name'] . 'AND user_pass ="' . md5($_SESSION['pass']) . '"';
             $auth = mysql_query($query, $db) or die(mysql_error($db));
             while ($row = mysql_fetch_assoc($auth)) {
-               foreach ($row as $value) {
-                   $user_auth .= $value;
-               }
+                $_SESSION['user_auth'] = $row['user_auth'];
+                $_SESSION['user_id'] = $row['user_id'];
             }
-            $_SESSION['user_auth'] = $user_auth; 
-             $query = 'SELECT user_id FROM users WHERE user_name = ' . $_SESSION['mysql_name'] . 'AND user_pass ="' . md5($_SESSION['pass']) . '"';
-                $sql = mysql_query($query, $db) or die(mysql_error($db));
-                while ($row = mysql_fetch_assoc($sql)) {
-                   foreach ($row as $value) {
-                        $_SESSION['user_id']=$value;
-                   }
-                }
             if (isset($_SESSION['user_auth'])){
                 header("Location: blog.php?action=view");
             }else{
