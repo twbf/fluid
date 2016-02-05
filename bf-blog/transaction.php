@@ -73,6 +73,18 @@ session_start();
                 session_destroy();
                 header("Location: index.php");
                 break;
+            case 'email':
+                require 'class.SimpleMail.php';
+                $message = new SimpleMail();
+
+                $message->setSendText(false);
+                $message->setToAddress('twbueler@gmail.com');
+                $message->setFromAddress('twbf@fluid.bugs3.com');
+                $message->setSubject('Testing HTML Email');
+                $message->setHTMLBody('<h1>Bueler-Faudree Blog</h1>');
+                $message->send();
+                header("Location: blog.php?action=view");
+                break;
         }
     }
 ?>
