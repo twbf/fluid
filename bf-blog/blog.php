@@ -107,6 +107,13 @@ session_start();
                         foreach ($row as $value) {
                             echo '<td>' . $value . '</td>';
                         }
+                        $query = 'SELECT first, last, email FROM user_info WHERE user_id=' . $row['user_id'];
+                        $mysql = mysql_query($query, $db) or die(mysql_error($db));
+                        while ($row1 = mysql_fetch_assoc($mysql)) {
+                            foreach ($row1 as $value) {
+                                echo '<td>' . $value . '</td>';
+                            }
+                        }
                         echo'<td><a href="transaction.php?action=delete&what=user&id=' . $row['user_id'] . '">Delete</a></td><td><a href="?action=add&edit-user=edit&id='. $row['user_id'] . '">Edit</a></td>';
                     }
                     echo '</table>';
@@ -135,6 +142,13 @@ session_start();
                             $name=$row['user_name'];
                             $auth=$row['user_auth'];
                         }
+                        $query = 'SELECT * FROM user_info WHERE user_id =' . $id;
+                        $sql = mysql_query($query, $db) or die(mysql_error($db));
+                        while ($row = mysql_fetch_assoc($sql)) {
+                            $first=$row['first'];
+                            $last=$row['last'];
+                            $email=$row['email'];
+                        }
                     }
                 }
                 echo '<form action="transaction.php?action=add';
@@ -159,9 +173,9 @@ session_start();
                     echo '</select>';
                 }
                 echo '
-                <p>First Name:</p><input type="text" name="fname">
-                <p>Last Name:</p><input type="text" name="lname">
-                <p>Email:</p><input type="text" name="email">';
+                <p>First Name:</p><input type="text" name="first" value="' .$first. '">
+                <p>Last Name:</p><input type="text" name="last" value="' .$last. '">
+                <p>Email:</p><input type="text" name="email" value="' .$email. '">';
                 echo'
                 <input type="submit" value="Add User">
                 </form>';
