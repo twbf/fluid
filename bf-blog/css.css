@@ -24,7 +24,11 @@ nav ul li{
     display:inline; 
     padding-right:20px;
 }
-nav{
+tr:nth-child(even){
+    background-color:#FFF;
+}
+td{
+    padding:3px;
 }
 
 /*classes*/
@@ -34,6 +38,9 @@ nav{
     justify-content: center;
     align-items: center;
     background-color:#E8AA64;
+}
+.content{
+    margin:5px;
 }
 .coll{
     -webkit-column-count: 5;
@@ -58,6 +65,10 @@ nav{
 }
 .post img{
     width:90%;
+    max-width:500px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 .post .small{
     font-size:.75em;

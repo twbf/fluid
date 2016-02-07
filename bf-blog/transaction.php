@@ -5,7 +5,7 @@ session_start();
     $mysqli = new mysqli("localhost", "root", "abcdef", "bf-blog");
     mysql_select_db(mysql_database, $db) or die(mysql_error($db));
     
-    if($_SESSION['user_auth']>=1){
+    if($_SESSION['user_auth']>=1 or $_GET['action']=='add'){
         function delete($database, $databaseid){
             global $_GET, $db;
             $id = $_GET['id'];
@@ -51,6 +51,7 @@ session_start();
                         
                     case 'post':
                         delete('post_word', 'post_word');
+                        delete('post','post_word');
                         break;
                 }
                 header("Location: blog.php?action=admin");
@@ -86,11 +87,11 @@ session_start();
                 require 'class.SimpleMail.php';
                 $message = new SimpleMail();
 
-                $message->setSendText(false);
-                $message->setToAddress('twbueler@gmail.com');
-                $message->setFromAddress('twbf@fluid.bugs3.com');
-                $message->setSubject('Testing HTML Email');
-                $message->setHTMLBody('<h1>Bueler-Faudree Blog</h1>');
+                $message->setSendText($_POST['text']);
+                $message->setToAddress('"' . $_POST['to'] . '"');
+                $message->setFromAddress('twbf.public@gmail.com');
+                $message->setSubject($_POST['subject']);
+                $message->setHTMLBody($_POST['html']);
                 $message->send();
                 header("Location: blog.php?action=view");
                 break;

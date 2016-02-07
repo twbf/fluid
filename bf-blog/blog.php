@@ -1,14 +1,16 @@
 <?php
 session_start();
-    if($_SESSION['user_auth']>=1){
+    if($_SESSION['user_auth']>=1  or $_GET['action']=='add'){
     require 'mysql-connect.inc.php';
     $db = mysql_connect(mysql_host,mysql_user,mysql_pass)or die('fail');
     mysql_select_db(mysql_database, $db) or die(mysql_error($db));
     
-    $query = 'SELECT first, last FROM user_info WHERE user_id=' . $_SESSION['user_id'];
-    $mysql = mysql_query($query, $db) or die(mysql_error($db));
-    while ($row = mysql_fetch_assoc($mysql)) {
-        $fullName = $row['first'] .' '. $row['last'];
+    if ($_SESSION['user_auth']>=1){
+        $query = 'SELECT first, last FROM user_info WHERE user_id=' . $_SESSION['user_id'];
+        $mysql = mysql_query($query, $db) or die(mysql_error($db));
+        while ($row = mysql_fetch_assoc($mysql)) {
+            $fullName = $row['first'] .' '. $row['last'];
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -129,6 +131,20 @@ session_start();
                         echo'<td><a href="transaction.php?action=delete&what=post&id=' . $row['post_word_id'] . '">Delete</a></td><td><a href="?action=post&edit-post=edit&id='. $row['post_word_id'] . '">Edit</a></td>';
                     }
                     echo '</table>';
+                    ?>
+                    <h2>Email</h2>
+                    <form action="transaction.php?action=email" method="POST">
+                        <p>To Address:</p>
+                        <input type="text" name="to" value="">
+                        <p>Subject:</p>
+                        <input type="text" name="subject" value="">
+                        <p>Text:</p>
+                        <textarea rows="4" cols="50" name="text"></textarea>
+                        <p>HTML:</p>
+                        <textarea rows="4" cols="50" name="html"></textarea>
+                        <input type="submit" value="post">
+                    </form>
+                    <?php
                 }
                 break;
             case 'add':
