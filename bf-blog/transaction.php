@@ -12,6 +12,17 @@ session_start();
             $query = 'DELETE FROM ' . $database . ' WHERE ' . $id . '=' . $databaseid . '_id';
             mysql_query($query, $db) or die(mysql_error($db));
         }
+        function email($to, $subject, $html){
+            require 'class.SimpleMail.php';
+            $message = new SimpleMail();
+            $message->setSendText(false);
+            $message->setToAddress('"' . $to . '"');
+            $message->setFromAddress('twbf.public@gmail.com');
+            $message->setSubject($subject);
+            $message->setHTMLBody($html);
+            $message->send();
+            return $message;
+        }
         switch($_GET['action']) {
             case 'post':
                 $user_id = $_SESSION['user_id'];
@@ -40,6 +51,10 @@ session_start();
                     $auth = mysql_query($query, $db) or die(mysql_error($db));
                     
                 }
+                if (email($_SESSION['user_id'], $_POST['title'], $_POST['content']) == ''){
+                    echo 'gfshkjd';
+                }
+                
                 header("Location: blog.php?action=view");
                 break;
             case 'delete':
@@ -84,16 +99,10 @@ session_start();
                 header("Location: index.php");
                 break;
             case 'email':
-                require 'class.SimpleMail.php';
-                $message = new SimpleMail();
-
-                $message->setSendText($_POST['text']);
-                $message->setToAddress('"' . $_POST['to'] . '"');
-                $message->setFromAddress('twbf.public@gmail.com');
-                $message->setSubject($_POST['subject']);
-                $message->setHTMLBody($_POST['html']);
-                $message->send();
-                header("Location: blog.php?action=view");
+                if (email($_POST['to'], $_POST['subject'], $_POST['html']) == ''){
+                    echo 'gfshkjd';
+                }
+                header("Location: blog.php?action=admin");
                 break;
         }
     }

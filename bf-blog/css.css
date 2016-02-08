@@ -70,6 +70,9 @@ td{
     margin-left: auto;
     margin-right: auto;
 }
+a:visited , a:link , .nolink{
+    text-decoration:none;
+}
 .post .small{
     font-size:.75em;
 }

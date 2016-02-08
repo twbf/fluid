@@ -35,6 +35,12 @@ session_start();
                 $_SESSION['user_auth'] = $row['user_auth'];
                 $_SESSION['user_id'] = $row['user_id'];
             }
+            $query = 'SELECT first, last, email FROM user_info WHERE user_id=' . $_SESSION['user_id'];
+            $mysql = mysql_query($query, $db) or die(mysql_error($db));
+            while ($row = mysql_fetch_assoc($mysql)) {
+                $_SESSION['fullName'] = $row['first'] .' '. $row['last'];
+                $_SESSION['email'] = $row['first'];
+            }
             if (isset($_SESSION['user_auth'])){
                 header("Location: blog.php?action=view");
             }else{
