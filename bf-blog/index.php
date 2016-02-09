@@ -39,7 +39,7 @@ session_start();
             $mysql = mysql_query($query, $db) or die(mysql_error($db));
             while ($row = mysql_fetch_assoc($mysql)) {
                 $_SESSION['fullName'] = $row['first'] .' '. $row['last'];
-                $_SESSION['email'] = $row['first'];
+                $_SESSION['email'] = $row['email'];
             }
             if (isset($_SESSION['user_auth'])){
                 header("Location: blog.php?action=view");

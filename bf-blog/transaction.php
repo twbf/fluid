@@ -51,8 +51,8 @@ session_start();
                     $auth = mysql_query($query, $db) or die(mysql_error($db));
                     
                 }
-                if (email($_SESSION['user_id'], $_POST['title'], $_POST['content']) == ''){
-                    echo 'gfshkjd';
+                $cont = '<h1>Bueler-Faudree Blog</h1><h2>' .$_POST['title']. '</h2><p>' . $_POST['content'] . '</p>';
+                if (email($_SESSION['email'], $_POST['title'], $cont) == true){
                 }
                 
                 header("Location: blog.php?action=view");
@@ -100,7 +100,6 @@ session_start();
                 break;
             case 'email':
                 if (email($_POST['to'], $_POST['subject'], $_POST['html']) == ''){
-                    echo 'gfshkjd';
                 }
                 header("Location: blog.php?action=admin");
                 break;

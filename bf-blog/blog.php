@@ -20,7 +20,7 @@ session_start();
                 <li><a href="?action=post">Post</a></li>
                 <li><a href="transaction.php?action=signout">Sign Out</a></li>
                 <?php if($_SESSION['user_auth']==5){echo '<li><a href="?action=admin">Admin</a></li>';} ?>
-                <li><?php echo $_SESSION['fullName']; ?></li>
+                <li><a href="?action=add&edit-user=edit&id=<?php echo $_SESSION['user_id']; ?>"><?php echo $_SESSION['fullName']; ?></a></li>
             </ul>
         </nav>
     </div>
@@ -142,7 +142,7 @@ session_start();
             case 'add':
                 $edit = $_GET['edit-user'];
                 $id = $_GET['id'];
-                if($_SESSION['user_auth']==5){
+                if($_SESSION['user_auth']==5 or $_SESSION['user_id']==$id){
                     if($edit=='edit'){
                         $query = 'SELECT * FROM users WHERE user_id =' . $id;
                         $sql = mysql_query($query, $db) or die(mysql_error($db));
