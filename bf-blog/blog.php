@@ -10,6 +10,8 @@ session_start();
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="css.css">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="js.js"></script>
     </head>
     <body>
     <div class="header">
@@ -45,7 +47,7 @@ session_start();
                 $query = 'SELECT * FROM post_word ORDER BY post_date DESC';
                 $sql = mysql_query($query, $db) or die(mysql_error($db));
                 while ($row = mysql_fetch_assoc($sql)) {
-                    echo '<a href="?action=bigview&id=' .$row['post_word_id']. '"><div class="post">';
+                    echo '<a href="?action=bigview&id=' .$row['post_word_id']. '"><div class="post" id="post">';
                     getPicture($row['post_word_id']);
                     echo '<h2>'. $row['post_title'] . '</h2>';
                     echo '<p class="nolink">'. substr($row['post_content'], 0, 100) . '...</p>';
