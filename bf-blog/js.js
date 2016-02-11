@@ -1,12 +1,13 @@
 window.onload = function(evt) {
     
     function getHeight(){
-        var post = document.getElementById('post')
+        var post = document.getElementById('post');
         
     }
-    
-    var $postLength = $('#post').length;
-    for(var i=0; i<$postLength; i++) {
-        
+    var postWhole = [document.getElementById('post')];
+    var post = new Array();
+    for(i=0; i<postWhole.length; i++) {
+        post[i] = postWhole.pop();
     }
+    window.alert(post[1].offsetHeight);
 }
