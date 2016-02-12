@@ -46,8 +46,9 @@ session_start();
                 echo '<div class="coll">';
                 $query = 'SELECT * FROM post_word ORDER BY post_date DESC';
                 $sql = mysql_query($query, $db) or die(mysql_error($db));
+                $counter=0;
                 while ($row = mysql_fetch_assoc($sql)) {
-                    echo '<a href="?action=bigview&id=' .$row['post_word_id']. '"><div class="post" id="post">';
+                    echo '<a href="?action=bigview&id=' .$row['post_word_id']. '"><div class="post" id="p'. $counter .'">';
                     getPicture($row['post_word_id']);
                     echo '<h2>'. $row['post_title'] . '</h2>';
                     echo '<p class="nolink">'. substr($row['post_content'], 0, 100) . '...</p>';
@@ -56,6 +57,7 @@ session_start();
                         echo'<p><a href="?action=post&edit-post=edit&id=' . $row['post_word_id'] . '">Edit</a></p>'; 
                     }  
                     echo '</div></a>';
+                    $counter++;
                 }
                 echo '</div>';
                 break;
