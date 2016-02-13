@@ -7,30 +7,42 @@ window.onload = function (evt) {
         //post[i] = new Array(2);
         post[i]=document.getElementById(id);
     }
-    
     var colls = 5;
-    for(i = 0; i < colls-1; i++) {
+    for(i = 0; i < colls; i++) {
         post[i]['coll'] = i;
         clums[i]=post[i].offsetHeight;
-        window.alert(clums[i]);
-    }
-    var counter = 0;
-    for(j = colls; j < 100; j++) {
-        post[j]['coll'] = counter;
-        clums[counter] += post[i].offsetHeight;
-        window.alert(clums[counter]);
-        counter++;
-        if(counter>4){
-            counter=0;
-        }
-    }
-    
-    var i = 0;
-    while(i < 100){
         p = 'p';
         id = p.concat(i);
         
-        document.getElementById(id).style.position = "absolute";
+        var obj = document.getElementById(id);
+        var collom = post[i]['coll'];
+        obj.style.position = "absolute";
+        obj.style.width = '190px';
+        obj.style.left = collom*225 + 'px';
+        window.alert(collom);
+    }
+    Array.prototype.min = function() {
+      return Math.min.apply(null, this);
+    };
+    for(j = colls; j <13; j++) {
+        p = 'p';
+        id = p.concat(j);
+        var clumIndex = clums.indexOf(clums.min());
+        var obj = document.getElementById(id);
+        var collom = clumIndex;
+        obj.style.position = "absolute";
+        obj.style.top = clums[collom] + 'px';
+        obj.style.width = '190px';
+        obj.style.left = collom*225 + 'px';
+        window.alert(collom);
+        post[j]['coll'] = clumIndex;
+        clums[clumIndex] += post[j].offsetHeight;
+        
+    }
+    
+    var i = 0;
+    while(i < 12){
+        
         
         i++;
         if(!document.getElementById(id)){
