@@ -43,7 +43,6 @@ session_start();
         }
         switch($_GET['action']) {
             case 'view':
-                echo '<div class="coll">';
                 $query = 'SELECT * FROM post_word ORDER BY post_date DESC';
                 $sql = mysql_query($query, $db) or die(mysql_error($db));
                 $counter=0;
@@ -59,7 +58,6 @@ session_start();
                     echo '</div></a>';
                     $counter++;
                 }
-                echo '</div>';
                 break;
             case 'bigview':
                 $query = 'SELECT * FROM post_word WHERE post_word_id=' . $_GET['id'];

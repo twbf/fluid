@@ -45,26 +45,10 @@ td{
 .content{
     margin:5px;
 }
-.coll{
-    -webkit-column-count: 5;
-	-webkit-column-gap: 10px;
-	-webkit-column-fill: auto;
-	-moz-column-count: 5;
-	-moz-column-gap: 10px;
-	-moz-column-fill: auto;
-	column-count: 5;
-	column-gap: 15px;
-	column-fill: auto;
-	margin:10px;
-}
 .post{
     border:2px solid #949494;
-    padding:5px;
     background-color:#E4E4E4;
-    -webkit-column-break-inside: avoid;
-	-moz-column-break-inside: avoid;
-	column-break-inside: avoid;
-	margin-bottom:10px;
+    padding:5px;
 }
 .post img{
     width:90%;
@@ -78,18 +62,4 @@ a:visited , a:link , .nolink{
 }
 .post .small{
     font-size:.75em;
-}
-@media (max-width: 1100px) {
-	.coll {
-		-webkit-column-count: 4;
-		-moz-column-count: 4;
-		column-count: 4;
-	}
-}
-@media (max-width: 755px) {
-	.coll {
-		-webkit-column-count: 3;
-		-moz-column-count: 3;
-		column-count: 3;
-	}
 }
