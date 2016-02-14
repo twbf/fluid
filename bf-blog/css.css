@@ -8,17 +8,17 @@
 /*tags*/
 body{
     font-family: 'Raleway', cursive;
-    background-color:#D4D4D4;
+    background-color:#EEEEEE;
     margin:0px;
 }
 
 h1,h2{
     font-family: 'Titillium Web', cursive;
-    color:#6464E8;
+    color:#AC3D3D;
 }
 h1{
     font-size:2em;
-    color:#4D339E;
+    color:#D41313;
 }
 nav ul li{
     display:inline; 
@@ -40,15 +40,16 @@ td{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color:#E8AA64;
+    background-color:#D4D4D4;
 }
 .content{
     margin:5px;
 }
 .post{
-    border:2px solid #949494;
+    /*border:2px solid #D4D4D4;*/
     background-color:#E4E4E4;
     padding:5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.39);
 }
 .post img{
     width:90%;
