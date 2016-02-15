@@ -1,8 +1,8 @@
 <?php
 session_start();
     require 'mysql-connect.inc.php';
-    $db = mysql_connect(mysql_host,mysql_user,mysql_pass)or die('fail');
-    mysql_select_db(mysql_database, $db) or die(mysql_error($db));
+    $db = mysqli_connect(mysql_host,mysql_user,mysql_pass)or die('fail');
+    mysqli_select_db(mysql_database, $db)
 ?>
 <!DOCTYPE html>
     <html lang="en">
@@ -30,14 +30,14 @@ session_start();
             $_SESSION['mysql_name']= '"'.$_SESSION['name'].'"';
             $_SESSION['mysql_pass'] = '"'.$_SESSION['pass'].'"';
             $query = 'SELECT user_auth, user_id FROM users WHERE user_name = ' . $_SESSION['mysql_name'] . 'AND user_pass ="' . md5($_SESSION['pass']) . '"';
-            $auth = mysql_query($query, $db) or die(mysql_error($db));
-            while ($row = mysql_fetch_assoc($auth)) {
+            $auth = mysqli_query($query, $db);
+            while ($row = mysqli_fetch_assoc($auth)) {
                 $_SESSION['user_auth'] = $row['user_auth'];
                 $_SESSION['user_id'] = $row['user_id'];
             }
             $query = 'SELECT first, last, email FROM user_info WHERE user_id=' . $_SESSION['user_id'];
-            $mysql = mysql_query($query, $db) or die(mysql_error($db));
-            while ($row = mysql_fetch_assoc($mysql)) {
+            $mysql = mysqli_query($query, $db);
+            while ($row = mysqli_fetch_assoc($mysql)) {
                 $_SESSION['fullName'] = $row['first'] .' '. $row['last'];
                 $_SESSION['email'] = $row['email'];
             }
