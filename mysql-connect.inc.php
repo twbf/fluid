@@ -1,6 +1,6 @@
 <?php
-    define('mysql_host','localhost');
-     define('mysql_user','root');
-     define('mysql_pass','abcdef');
-     define('mysql_database','bf-blog');
+     define('mysql_host','mysql.hostinger.co.uk');
+     define('mysql_user','u823555011_twbf');
+     define('mysql_pass','T547mile');
+     define('mysql_database','u823555011_blog');
 ?>
