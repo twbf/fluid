@@ -1,16 +1,16 @@
 <?php
 session_start();
     require 'mysql-connect.inc.php';
-    $db = mysql_connect(mysql_host,mysql_user,mysql_pass)or die('fail');
+    $db = mysqli_connect(mysql_host,mysql_user,mysql_pass);
     $mysqli = new mysqli("localhost", "root", "abcdef", "bf-blog");
-    mysql_select_db(mysql_database, $db) or die(mysql_error($db));
+    mysqli_select_db($db, mysql_database);
     
     if($_SESSION['user_auth']>=1 or $_GET['action']=='add'){
         function delete($database, $databaseid){
             global $_GET, $db;
             $id = $_GET['id'];
             $query = 'DELETE FROM ' . $database . ' WHERE ' . $id . '=' . $databaseid . '_id';
-            mysql_query($query, $db) or die(mysql_error($db));
+            mysqli_query($db, $query);
         }
         function email($to, $subject, $html){
             require 'class.SimpleMail.php';
@@ -34,21 +34,20 @@ session_start();
                     post_date= NULL
                     WHERE post_word_id=' .$_GET['id'];
                 }
-                $auth = mysql_query($query, $db) or die(mysql_error($db));
+                $auth = mysqli_query($db, $query);
                 $query = 'SET @post_word_id = LAST_INSERT_ID()';
-                $auth = mysql_query($query, $db) or die(mysql_error($db));
-                if($_FILES['picture']['tmp_name']=="none"){
-                } else {
+                $auth = mysqli_query($db, $query);
+                if($_FILES['image']['error']==0){
                     $dest ='images/' . $_FILES['picture']['name'];
                     $tmp =  $_FILES['picture']['tmp_name'];
                     move_uploaded_file($tmp,$dest);
                     $query = 'INSERT INTO post_picture (post_picture_id, picture_location, picture_user_id) VALUES (NULL,"'. $_FILES['picture']['name'] .'",'. $user_id .')';
-                    $auth = mysql_query($query, $db) or die(mysql_error($db));
+                    $auth = mysqli_query($db, $query);
                     $query = 'SET @post_picture_id = LAST_INSERT_ID()';
-                    $auth = mysql_query($query, $db) or die(mysql_error($db));
+                    $auth = mysqli_query($db, $query);
                     
                     $query = 'INSERT INTO post (post_id, post_word_id, post_picture_id) VALUES (NULL,@post_word_id,@post_picture_id)';
-                    $auth = mysql_query($query, $db) or die(mysql_error($db));
+                    $auth = mysqli_query($db, $query);
                     
                 }
                 $cont = '<h1>Bueler-Faudree Blog</h1><h2>' .$_POST['title']. '</h2><p>' . $_POST['content'] . '</p>';
@@ -91,7 +90,7 @@ session_start();
                     $query .= 'user_auth =' . $auth . 'WHERE user_id=' . $_GET['id']  . '; ';
                     $query .= 'UPDATE user_info SET first=' .$first. ', last=' .$last. ', email=' .$email . 'WHERE user_id=' . $_GET['id'];
                  }
-                 $mysqli->multi_query($query) or die(mysql_error($db));
+                 $mysqli->multi_query($query);
                  header("Location: blog.php?action=admin");
                  break;
              case 'signout':
