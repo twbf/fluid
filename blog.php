@@ -108,7 +108,7 @@ session_start();
                 if($edit=='edit'){
                     echo '&edit-post=edit&id='.$id;
                 }
-                echo '" method="POST" enctype= "multipart/form-data" ><p>Title:</p><input type="text" name="title" value="' . $title . '"><p>Body:</p><textarea rows="4" cols="50" name="content">' . $content . '</textarea><p>If you would like a picture to appear with your post please select one</p><input type="hidden" name="MAX_FILE_SIZE" value="2000000"/><input type="file" name="picture"><input type="submit" value="post"></form>';
+                echo '" method="POST" enctype= "multipart/form-data" ><p>Title:</p><input type="text" name="title" value="' . $title . '"><p>Body:</p><textarea rows="4" cols="50" name="content">' . $content . '</textarea><p>If you would like a picture to appear with your post please select one</p><input type="hidden" name="MAX_FILE_SIZE" value="2000000"/><input type="file" name="picture"><input type="submit" value="Post"></form>';
                 break;
             case 'admin':
                 if($_SESSION['user_auth']==5){
@@ -153,7 +153,7 @@ session_start();
                         <textarea rows="4" cols="50" name="text"></textarea>
                         <p>HTML:</p>
                         <textarea rows="4" cols="50" name="html"></textarea>
-                        <input type="submit" value="post">
+                        <input type="submit" value="Send">
                     </form>
                     <?php
                 }
@@ -204,7 +204,7 @@ session_start();
                 <p>Last Name:</p><input type="text" name="last" value="' .$last. '">
                 <p>Email:</p><input type="text" name="email" value="' .$email. '">';
                 echo'
-                <input type="submit" value="Add User">
+                <input type="submit" value="Add/Update User">
                 </form>';
                 break;
             }
