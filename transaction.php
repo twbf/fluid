@@ -35,20 +35,19 @@ session_start();
                     WHERE post_word_id=' .$_GET['id'];
                 }
                 $auth = mysqli_query($db, $query);
-                $query = 'SET @post_word_id = LAST_INSERT_ID()';
-                $auth = mysqli_query($db, $query);
+                $last_word_id = mysqli_insert_id($db);
                 if($_FILES['image']['error']==0){
                     $dest ='images/' . $_FILES['picture']['name'];
                     $tmp =  $_FILES['picture']['tmp_name'];
                     move_uploaded_file($tmp,$dest);
                     $query = 'INSERT INTO post_picture (post_picture_id, picture_location, picture_user_id) VALUES (NULL,"'. $_FILES['picture']['name'] .'",'. $user_id .')';
                     $auth = mysqli_query($db, $query);
-                    $query = 'SET @post_picture_id = LAST_INSERT_ID()';
+                    $last_picture_id = mysqli_insert_id($db);
+                    if($last_word_id==0){
+                        $last_word_id==$_GET['id'];
+                    }
+                    $query = 'INSERT INTO post (post_id, post_word_id, post_picture_id) VALUES (NULL,'.$last_word_id.','.$last_picture_id.')';
                     $auth = mysqli_query($db, $query);
-                    
-                    $query = 'INSERT INTO post (post_id, post_word_id, post_picture_id) VALUES (NULL,@post_word_id,@post_picture_id)';
-                    $auth = mysqli_query($db, $query);
-                    
                 }
                 $cont = '<h1>Bueler-Faudree Blog</h1><h2>' .$_POST['title']. '</h2><p>' . $_POST['content'] . '</p>';
                 if (email($_SESSION['email'], $_POST['title'], $cont) == true){
