@@ -65,6 +65,7 @@ session_start();
                 echo 'You either supplied the wrong credintials or you are not a user and need to <a href="blog.php?action=add">registar</a>';
             }
         }else{
+            echo $_GET['warning'];
     ?>
             <form action="index.php" method="post">
               Username:

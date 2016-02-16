@@ -90,8 +90,12 @@ session_start();
                     $query .= 'user_auth =' . $auth . 'WHERE user_id=' . $_GET['id']  . '; ';
                     $query .= 'UPDATE user_info SET first=' .$first. ', last=' .$last. ', email=' .$email . 'WHERE user_id=' . $_GET['id'];
                  }
-                 $mysqli->multi_query($query);
-                 header("Location: blog.php?action=admin");
+                 mysqli_multi_query($db, $query);
+                 if($_SESSION['user_auth']=5){
+                    header("Location: blog.php?action=admin");
+                 }else{
+                    header("Location: index.php?warning=" . urlencode('Please Sign In Angain'));
+                 }
                  break;
              case 'signout':
                 session_destroy();
