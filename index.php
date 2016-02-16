@@ -31,6 +31,8 @@ session_start();
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="screen/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="js.js"></script>
     </head>
     <body>
     <div class="header">
@@ -77,12 +79,25 @@ session_start();
         </nav>
     </div>
     <div class="content">
-        <form action="blog.php?action=add" method="post">
-          <input type="submit" value="Registar">
-        </form>
-        <?php
-        echo gethostname();
-        ?>
+        <div class="post" id="p0">
+            <h2>Please Registar</h2>
+            <form action="blog.php?action=add" method="post">
+              <input type="submit" value="Registar">
+            </form>
+            <p>Once you registar you will get an email when your account gets activated. It can take as much as 24 hours for that to happen.</p>
+            <p>Until we have a better hosting plan and security system the blog users are limited to family and friends of Thomas Bueler</p>
+        </div>
+        <div class="post" id="p1">
+            <h2>Support/
+            Administrator</h2>
+            <p>Thomas Bueler</p>
+            <p>Email: <a href="mailto:twbf@bf-blog.esy.es">twbf@bf-blog.esy.es</a></p>
+            <p>Website #1: <a href="http://twbf.github.io">twbf.github.io</a></p>
+            <p>Wedsite #2: <a href="http://twbf.esy.es">twbf.esy.es</a></p>
+        </div>
+        <footer>
+            Copyright &copy; 2016 TWBF All rights reserved.
+        </footer>
     </div>
     </body>
 </html>

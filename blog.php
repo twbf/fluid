@@ -213,6 +213,9 @@ session_start();
                 break;
             }
 ?>
+                <footer>
+                    Copyright &copy; 2016 TWBF All rights reserved.
+                </footer>
             </div>
 <?php
     }elseif($_SESSION['user_auth']=0){
