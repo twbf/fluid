@@ -1,7 +1,11 @@
 <?php
 session_start();
     if($_SESSION['user_auth']>=1  or $_GET['action']=='add'){
-    require 'mysql-connect.inc.php';
+    if(gethostname() == 'bueler-gazelle'){
+        require 'local-mysql-connect.inc.php';
+    }else{
+        require 'mysql-connect.inc.php';
+    }
     $db = mysqli_connect(mysql_host,mysql_user,mysql_pass);
     mysqli_select_db($db, mysql_database);
 ?>

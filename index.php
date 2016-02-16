@@ -1,6 +1,10 @@
 <?php
 session_start();
-    require 'mysql-connect.inc.php';
+    if(gethostname() == 'bueler-gazelle'){
+        require 'local-mysql-connect.inc.php';
+    }else{
+        require 'mysql-connect.inc.php';
+    }
     $db = mysqli_connect(mysql_host,mysql_user,mysql_pass);
     mysqli_select_db($db, mysql_database)
 ?>
@@ -77,7 +81,7 @@ session_start();
           <input type="submit" value="Registar">
         </form>
         <?php
-        
+        echo gethostname();
         ?>
     </div>
     </body>

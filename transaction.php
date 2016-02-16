@@ -1,6 +1,10 @@
 <?php
 session_start();
-    require 'mysql-connect.inc.php';
+    if(gethostname() == 'bueler-gazelle'){
+        require 'local-mysql-connect.inc.php';
+    }else{
+        require 'mysql-connect.inc.php';
+    }
     $db = mysqli_connect(mysql_host,mysql_user,mysql_pass);
     $mysqli = new mysqli("localhost", "root", "abcdef", "bf-blog");
     mysqli_select_db($db, mysql_database);
@@ -52,7 +56,6 @@ session_start();
                 $cont = '<h1>Bueler-Faudree Blog</h1><h2>' .$_POST['title']. '</h2><p>' . $_POST['content'] . '</p>';
                 if (email($_SESSION['email'], $_POST['title'], $cont) == true){
                 }
-                
                 header("Location: blog.php?action=view");
                 break;
             case 'delete':
