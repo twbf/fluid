@@ -91,10 +91,10 @@ session_start();
                     $query .= 'UPDATE user_info SET first=' .$first. ', last=' .$last. ', email=' .$email . 'WHERE user_id=' . $_GET['id'];
                  }
                  mysqli_multi_query($db, $query);
-                 if($_SESSION['user_auth']=5){
+                 if($_SESSION['user_auth']==5){
                     header("Location: blog.php?action=admin");
                  }else{
-                    header("Location: index.php?warning=" . urlencode('Please Sign In Angain'));
+                    header("Location: index.php?warning=" . urlencode('Please Sign In Again'));
                  }
                  break;
              case 'signout':

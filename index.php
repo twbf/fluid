@@ -34,8 +34,6 @@ session_start();
         <nav>
             <ul>
                 <li><a href="?action=view">Home</a></li>
-                <li><a href="?action=post">Post</a></li>
-                <li><a href="index.php">Sign Out</a></li>
                 <?php if($_SESSION['user_auth']==5){echo '<li><a href="?action=admin">Admin</a></li>';} ?>
             </ul>
         </nav>
