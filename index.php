@@ -38,6 +38,7 @@ session_start();
     <div class="header">
         <h1>Bueler-Faudree Blog</h1>
         <nav>
+            <ul>
             <?php
                 if(isset($_POST['username'])){
         
@@ -76,6 +77,7 @@ session_start();
                 <?php
             }
                 ?>
+            </ul>
         </nav>
     </div>
     <div class="content">

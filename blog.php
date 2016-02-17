@@ -202,6 +202,8 @@ session_start();
                         echo '>' . $total . '</option>';
                     }
                     echo '</select>';
+                } elseif ($_SESSION['user_auth']>=1){
+                    echo '<p>Security Level:</p><select name="auth"><option value="1">1</option></select>';
                 }
                 echo '
                 <p>First Name:</p><input type="text" name="first" value="' .$first. '">
