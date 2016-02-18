@@ -1,0 +1,8 @@
+.blur{
+    -webkit-filter:blur(10px);
+    filter:blur(10px);
+}
+.middle div{
+    margin:10%;
+    width:60%;
+}

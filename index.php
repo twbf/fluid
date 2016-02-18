@@ -13,7 +13,6 @@ session_start();
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="css.css">
-        <link rel="stylesheet" type="text/css" href="css.css">
         <link rel="apple-touch-icon" sizes="57x57" href="screen/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="screen/apple-icon-60x60.png">
         <link rel="apple-touch-icon" sizes="72x72" href="screen/apple-icon-72x72.png">

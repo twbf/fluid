@@ -56,8 +56,14 @@ footer{
 .content{
     margin:5px;
 }
+.middle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .post{
     background-color:#E4E4E4;
+    z-index:-1;
     padding:5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 15px 0 rgba(0, 0, 0, 0.39);
 }

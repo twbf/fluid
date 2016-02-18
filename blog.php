@@ -40,7 +40,7 @@ session_start();
         <nav>
             <ul>
                 <li><a href="?action=view">Home</a></li>
-                <li><a href="?action=post">Post</a></li>
+                <li><a href="?action=view&action2=post">Post</a></li>
                 <li><a href="transaction.php?action=signout">Sign Out</a></li>
                 <?php if($_SESSION['user_auth']==5){echo '<li><a href="?action=admin">Admin</a></li>';} ?>
                 <li><a href="?action=add&edit-user=edit&id=<?php echo $_SESSION['user_id']; ?>"><?php echo $_SESSION['fullName']; ?></a></li>
@@ -68,7 +68,7 @@ session_start();
                 $sql = mysqli_query($db, $query);
                 $counter=0;
                 while ($row = mysqli_fetch_assoc($sql)) {
-                    echo '<a href="?action=bigview&id=' .$row['post_word_id']. '"><div class="post" id="p'. $counter .'">';
+                    echo '<a href="?action=view&action2=bigview&id=' .$row['post_word_id']. '"><div class="post blur" id="p'. $counter .'">';
                     getPicture($row['post_word_id']);
                     echo '<h2>'. $row['post_title'] . '</h2>';
                     echo '<p class="nolink">'. substr($row['post_content'], 0, 100) . '...</p>';
@@ -79,40 +79,45 @@ session_start();
                     echo '</div></a>';
                     $counter++;
                 }
-                break;
-            case 'bigview':
-                $query = 'SELECT * FROM post_word WHERE post_word_id=' . $_GET['id'];
-                $sql = mysqli_query($db, $query);
-                while ($row = mysqli_fetch_assoc($sql)) {
-                    echo '<div class="post">';
-                    getPicture($row['post_word_id']);
-                    echo '<h2>'. $row['post_title'] . '</h2>';
-                    echo '<p>'. $row['post_content'] . '</p>';
-                    echo '<p class="small">'. $row['post_date'] . '</p>';
-                    if($_SESSION['user_id']==$row['post_user_id']){
-                        echo'<p><a href="?action=post&edit-post=edit&id=' . $row['post_word_id'] . '">Edit</a></p>'; 
-                    }  
-                    echo '</div>';
-                }
-                break;
-            case 'post':
-                $edit = $_GET['edit-post'];
-                $id = $_GET['id'];
-                if($_SESSION['user_auth']==5 or $_SESSION['user_auth']){
-                    if($edit=='edit'){
-                        $query = 'SELECT post_title, post_content FROM post_word WHERE post_word_id =' . $id;
-                        $sql = mysqli_query($db, $query);
-                        while ($row = mysqli_fetch_assoc($sql)) {
-                            $title=$row['post_title'];
-                            $content=$row['post_content'];
+                if($_GET['action2']=='post'){
+                    echo '<link rel="stylesheet" type="text/css" href="middle.css">';
+                    echo '<div class="middle">';
+                    $edit = $_GET['edit-post'];
+                    $id = $_GET['id'];
+                    if($_SESSION['user_auth']==5 or $_SESSION['user_auth']){
+                        if($edit=='edit'){
+                            $query = 'SELECT post_title, post_content FROM post_word WHERE post_word_id =' . $id;
+                            $sql = mysqli_query($db, $query);
+                            while ($row = mysqli_fetch_assoc($sql)) {
+                                $title=$row['post_title'];
+                                $content=$row['post_content'];
+                            }
                         }
                     }
+                    echo '<form action="transaction.php?action=post';
+                    if($edit=='edit'){
+                        echo '&edit-post=edit&id='.$id;
+                    }
+                    echo '" method="POST" enctype= "multipart/form-data" ><p>Title:</p><input type="text" name="title" value="' . $title . '"><p>Body:</p><textarea rows="4" cols="50" name="content">' . $content . '</textarea><p>If you would like a picture to appear with your post please select one</p><input type="hidden" name="MAX_FILE_SIZE" value="2000000"/><input type="file" name="picture"><input type="submit" value="Post"></form></div>';
                 }
-                echo '<form action="transaction.php?action=post';
-                if($edit=='edit'){
-                    echo '&edit-post=edit&id='.$id;
+                if($_GET['action2']=='bigview'){
+                    echo '<link rel="stylesheet" type="text/css" href="middle.css">';
+                    echo '<div class="middle">';
+                    $query = 'SELECT * FROM post_word WHERE post_word_id=' . $_GET['id'];
+                    $sql = mysqli_query($db, $query);
+                    while ($row = mysqli_fetch_assoc($sql)) {
+                        echo '<div class="post">';
+                        getPicture($row['post_word_id']);
+                        echo '<h2>'. $row['post_title'] . '</h2>';
+                        echo '<p>'. $row['post_content'] . '</p>';
+                        echo '<p class="small">'. $row['post_date'] . '</p>';
+                        if($_SESSION['user_id']==$row['post_user_id']){
+                            echo'<p><a href="?action=post&edit-post=edit&id=' . $row['post_word_id'] . '">Edit</a></p>'; 
+                        }  
+                        echo '</div>';
+                    }
+                    echo '</div>';
                 }
-                echo '" method="POST" enctype= "multipart/form-data" ><p>Title:</p><input type="text" name="title" value="' . $title . '"><p>Body:</p><textarea rows="4" cols="50" name="content">' . $content . '</textarea><p>If you would like a picture to appear with your post please select one</p><input type="hidden" name="MAX_FILE_SIZE" value="2000000"/><input type="file" name="picture"><input type="submit" value="Post"></form>';
                 break;
             case 'admin':
                 if($_SESSION['user_auth']==5){
