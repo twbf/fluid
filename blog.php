@@ -74,14 +74,14 @@ session_start();
                     echo '<p class="nolink">'. substr($row['post_content'], 0, 100) . '...</p>';
                     echo '<p class="small">'. $row['post_date'] . '</p>';
                     if($_SESSION['user_id']==$row['post_user_id']){
-                        echo'<p><a href="?action=post&edit-post=edit&id=' . $row['post_word_id'] . '">Edit</a></p>'; 
+                        echo'<p><a href="?action=view&action2=post&edit-post=edit&id=' . $row['post_word_id'] . '">Edit</a></p>'; 
                     }  
                     echo '</div></a>';
                     $counter++;
                 }
                 if($_GET['action2']=='post'){
                     echo '<link rel="stylesheet" type="text/css" href="middle.css">';
-                    echo '<div class="middle">';
+                    echo '<div class="middle"><div class="post">';
                     $edit = $_GET['edit-post'];
                     $id = $_GET['id'];
                     if($_SESSION['user_auth']==5 or $_SESSION['user_auth']){
@@ -98,7 +98,7 @@ session_start();
                     if($edit=='edit'){
                         echo '&edit-post=edit&id='.$id;
                     }
-                    echo '" method="POST" enctype= "multipart/form-data" ><p>Title:</p><input type="text" name="title" value="' . $title . '"><p>Body:</p><textarea rows="4" cols="50" name="content">' . $content . '</textarea><p>If you would like a picture to appear with your post please select one</p><input type="hidden" name="MAX_FILE_SIZE" value="2000000"/><input type="file" name="picture"><input type="submit" value="Post"></form></div>';
+                    echo '" method="POST" enctype= "multipart/form-data" ><p>Title:</p><input type="text" name="title" value="' . $title . '"><p>Body:</p><textarea rows="4" cols="50" name="content">' . $content . '</textarea><p>If you would like a picture to appear with your post please select one</p><input type="hidden" name="MAX_FILE_SIZE" value="2000000"/><input type="file" name="picture"><input type="submit" value="Post"></form></div></div>';
                 }
                 if($_GET['action2']=='bigview'){
                     echo '<link rel="stylesheet" type="text/css" href="middle.css">';
@@ -112,7 +112,7 @@ session_start();
                         echo '<p>'. $row['post_content'] . '</p>';
                         echo '<p class="small">'. $row['post_date'] . '</p>';
                         if($_SESSION['user_id']==$row['post_user_id']){
-                            echo'<p><a href="?action=post&edit-post=edit&id=' . $row['post_word_id'] . '">Edit</a></p>'; 
+                            echo'<p><a href="?action=view&action2=post&edit-post=edit&id=' . $row['post_word_id'] . '">Edit</a></p>'; 
                         }  
                         echo '</div>';
                     }
@@ -148,7 +148,7 @@ session_start();
                         foreach ($row as $value) {
                             echo '<td>' . $value . '</td>';
                         }
-                        echo'<td><a href="transaction.php?action=delete&what=post&id=' . $row['post_word_id'] . '">Delete</a></td><td><a href="?action=post&edit-post=edit&id='. $row['post_word_id'] . '">Edit</a></td>';
+                        echo'<td><a href="transaction.php?action=delete&what=post&id=' . $row['post_word_id'] . '">Delete</a></td><td><a href="?action=view&action2=post&edit-post=edit&id='. $row['post_word_id'] . '">Edit</a></td>';
                     }
                     echo '</table>';
                     ?>

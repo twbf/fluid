@@ -6,12 +6,14 @@
 
 
 /*tags*/
+html, body{
+    height:100%;
+}
 body{
     font-family: 'Raleway', cursive;
     background-color:#EEEEEE;
     margin:0px;
 }
-
 h1,h2{
     font-family: 'Titillium Web', cursive;
     color:#AC3D3D;
@@ -54,18 +56,14 @@ footer{
     background-color:#D4D4D4;
 }
 .content{
+    height:100%;
     margin:5px;
-}
-.middle{
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 .post{
     background-color:#E4E4E4;
-    z-index:-1;
     padding:5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 15px 0 rgba(0, 0, 0, 0.39);
+    z-index:1;
 }
 .post img{
     width:90%;
