@@ -14,6 +14,7 @@ session_start();
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="css.css">
+        <link rel="stylesheet" type="text/css" href="middle.css">
         <link rel="apple-touch-icon" sizes="57x57" href="screen/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="screen/apple-icon-60x60.png">
         <link rel="apple-touch-icon" sizes="72x72" href="screen/apple-icon-72x72.png">
@@ -33,11 +34,41 @@ session_start();
         <meta name="theme-color" content="#ffffff">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="js.js"></script>
+        <script>
+            function bigView(elem){
+                var clone = elem.cloneNode(true);
+                clone.id = "clone";
+                clone.removeAttribute("style");
+                clone.setAttribute("onclick","");
+                clone.className = "post";
+                var clonP = clone.getElementsByTagName("p");
+                clonP[0].setAttribute("class","none");
+                clonP[1].setAttribute("class","");
+                var middle = document.createElement("div");
+                middle.setAttribute("class","middle");
+                middle.setAttribute("id","tmp");
+                middle.appendChild(clone)
+                elem.parentNode.appendChild(middle);
+                $("#clone").prepend('<img src="Delete-50.png" class="deleteButton">');
+                clone.firstChild.setAttribute("onclick","backHome(this)");
+                document.styleSheets[1].disabled = false;
+            }
+            function backHome(elem){
+                var parent = document.getElementById("content");
+                var child = document.getElementById("tmp");
+                parent.removeChild(child);
+                document.styleSheets[1].disabled = true;
+            }
+        </script>
     </head>
     <body>
     <div class="header">
         <h1>Bueler-Faudree Blog</h1>
         <nav>
+            <form action="" method="POST">
+                <input type="text" name="to" value="">
+                <input type="submit" value="Search">
+            </form>
             <ul>
                 <li><a href="?action=view">Home</a></li>
                 <li><a href="?action=view&action2=post">Post</a></li>
@@ -47,7 +78,7 @@ session_start();
             </ul>
         </nav>
     </div>
-    <div class="content">
+    <div class="content" id="content">
 <?php
         function getPicture($rowid){
             global $db;
@@ -68,15 +99,15 @@ session_start();
                 $sql = mysqli_query($db, $query);
                 $counter=0;
                 while ($row = mysqli_fetch_assoc($sql)) {
-                    echo '<a href="?action=view&action2=bigview&id=' .$row['post_word_id']. '"><div class="post blur" id="p'. $counter .'">';
+                    echo '<div class="post blur" id="p'. $counter .'" onclick = "bigView(this)">';
                     getPicture($row['post_word_id']);
                     echo '<h2>'. $row['post_title'] . '</h2>';
-                    echo '<p class="nolink">'. substr($row['post_content'], 0, 100) . '...</p>';
-                    echo '<p class="small">'. $row['post_date'] . '</p>';
+                    echo '<p class="nolink" id="shorten">' . $row['post_content'] . '</p>';
+                    echo '<p class="none"></p><p class="small">'. $row['post_date'] . '</p>';
                     if($_SESSION['user_id']==$row['post_user_id']){
                         echo'<p><a href="?action=view&action2=post&edit-post=edit&id=' . $row['post_word_id'] . '">Edit</a></p>'; 
                     }  
-                    echo '</div></a>';
+                    echo '</div>';
                     $counter++;
                 }
                 if($_GET['action2']=='post'){
@@ -99,24 +130,6 @@ session_start();
                         echo '&edit-post=edit&id='.$id;
                     }
                     echo '" method="POST" enctype= "multipart/form-data" ><p>Title:</p><input type="text" name="title" value="' . $title . '"><p>Body:</p><textarea rows="4" cols="50" name="content">' . $content . '</textarea><p>If you would like a picture to appear with your post please select one</p><input type="hidden" name="MAX_FILE_SIZE" value="2000000"/><input type="file" name="picture"><input type="submit" value="Post"></form></div></div>';
-                }
-                if($_GET['action2']=='bigview'){
-                    echo '<link rel="stylesheet" type="text/css" href="middle.css">';
-                    echo '<div class="middle">';
-                    $query = 'SELECT * FROM post_word WHERE post_word_id=' . $_GET['id'];
-                    $sql = mysqli_query($db, $query);
-                    while ($row = mysqli_fetch_assoc($sql)) {
-                        echo '<div class="post">';
-                        getPicture($row['post_word_id']);
-                        echo '<h2>'. $row['post_title'] . '</h2>';
-                        echo '<p>'. $row['post_content'] . '</p>';
-                        echo '<p class="small">'. $row['post_date'] . '</p>';
-                        if($_SESSION['user_id']==$row['post_user_id']){
-                            echo'<p><a href="?action=view&action2=post&edit-post=edit&id=' . $row['post_word_id'] . '">Edit</a></p>'; 
-                        }  
-                        echo '</div>';
-                    }
-                    echo '</div>';
                 }
                 break;
             case 'admin':
