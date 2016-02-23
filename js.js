@@ -1,7 +1,5 @@
 window.onload = function (evt) {
     
-    document.styleSheets[1].disabled = true;
-    
     //positioning posts    
     
     var post = [], i, id;
@@ -37,8 +35,21 @@ window.onload = function (evt) {
             clums[k] += post[i].offsetHeight + 20;
         }
     }
+    
+    //nav bar
+    function navBar(){
+        if(window.innerHeight<=740){
+            $('#menu').addClass('navNone');
+            $('#menuBut' ).click(function(){
+    	        $('.navNone').toggleClass('navExpand');
+    	    })
+        }
+    }
+    
     $(window).resize(function(){
         style();
+        navBar();
     });
     style();
+    navBar();
 };

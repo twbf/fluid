@@ -50,6 +50,7 @@ footer{
 /*classes*/
 .header{
     width:100%;
+    height:90px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -85,4 +86,31 @@ a:visited , a:link , .nolink{
 
 .post .none{
     font-size:0em;
+}
+.navNone{
+    display:none !important;
+}
+.navExpand{
+    display:block !important;
+}
+.navExpand ul li {
+    display:block;
+}
+/*button*/
+.menu-btn div {
+ padding: 5px;
+ line-height: 1.2;
+ font-size: 18px;
+ font-weight: 200;
+ vertical-align: middle;
+ z-index: 99;
+}
+ 
+.menu-btn span {
+ display: block;
+ width: 19px;
+ height: 3px;
+ margin: 4px 0;
+ background: rgb(0,0,0);
+ z-index: 99;
 }
