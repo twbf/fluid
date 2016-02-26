@@ -38,11 +38,17 @@ window.onload = function (evt) {
     
     //nav bar
     function navBar(){
-        if(window.innerHeight<=740){
+        if(window.innerWidth<=999){
             $('#menu').addClass('navNone');
+            $('#menuBut').removeClass('navNone');
             $('#menuBut' ).click(function(){
     	        $('.navNone').toggleClass('navExpand');
     	    })
+        } else {
+            $('.navNone').removeClass('navExpand');
+            $('#menuBut').addClass('navNone');
+            $('#menu').removeClass('navNone');
+            
         }
     }
     

@@ -65,12 +65,11 @@ session_start();
     <body>
     <div class="header">
         <h1>Bueler-Faudree Blog</h1>
-        <nav>
-            <form action="" method="POST">
-                <input type="text" name="to" value="">
-                <input type="submit" value="Search">
-            </form>
-            <div id="menu">
+        <form action="" method="POST">
+            <input type="text" name="to" value="">
+            <input type="submit" value="Search">
+        </form>
+        <div class="menu" id="menu">
             <ul>
                 <li><a href="?action=view">Home</a></li>
                 <li><a href="?action=view&action2=post">Post</a></li>
@@ -78,14 +77,13 @@ session_start();
                 <?php if($_SESSION['user_auth']==5){echo '<li><a href="?action=admin">Admin</a></li>';} ?>
                 <li><a href="?action=add&edit-user=edit&id=<?php echo $_SESSION['user_id']; ?>"><?php echo $_SESSION['fullName']; ?></a></li>
             </ul>
-            </div>
-            <div class="menu-btn" id="menuBut">
-                 <div></div>
-                 <span></span>
-                 <span></span>
-                 <span></span>
-            </div>
-        </nav>
+        </div>
+        <div class="menu-btn" id="menuBut">
+             <div></div>
+             <span></span>
+             <span></span>
+             <span></span>
+        </div>
     </div>
     <div class="content" id="content">
 <?php
