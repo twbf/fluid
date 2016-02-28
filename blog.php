@@ -64,10 +64,10 @@ session_start();
     </head>
     <body>
     <div class="header">
-        <h1>Bueler-Faudree Blog</h1>
-        <form action="" method="POST">
-            <input type="text" name="to" value="">
-            <input type="submit" value="Search">
+        <h1>B.F. BLOG</h1>
+        <form action="?action=view" method="POST">
+            <input type="text" name="search" value="" class="searchBox">
+            <input type="submit" value="Search"  class="searchBut">
         </form>
         <div class="menu" id="menu">
             <ul>
@@ -103,6 +103,9 @@ session_start();
         switch($_GET['action']) {
             case 'view':
                 $query = 'SELECT * FROM post_word ORDER BY post_date DESC';
+                if($_POST['search']==true){
+                    $query = 'SELECT * FROM post_word WHERE post_title LIKE "%' . $_POST['search'] . '%" OR post_content LIKE "%' . $_POST['search'] . '%" ORDER BY post_date DESC';
+                }
                 $sql = mysqli_query($db, $query);
                 $counter=0;
                 while ($row = mysqli_fetch_assoc($sql)) {

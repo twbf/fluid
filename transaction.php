@@ -40,7 +40,7 @@ session_start();
                 }
                 $auth = mysqli_query($db, $query);
                 $last_word_id = mysqli_insert_id($db);
-                if($_FILES['image']['error']==0){
+                if($_FILES['picture']['error']==0){
                     $dest ='images/' . $_FILES['picture']['name'];
                     $tmp =  $_FILES['picture']['tmp_name'];
                     move_uploaded_file($tmp,$dest);

@@ -2,8 +2,12 @@
 
 /*@imports*/
 
-@import url(https://fonts.googleapis.com/css?family=Dancing+Script|Comfortaa|Titillium+Web|Raleway);
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web|Raleway);
 
+@font-face {
+    font-family: font;
+    src: url(nevis.ttf);
+}
 
 /*tags*/
 html, body{
@@ -14,13 +18,17 @@ body{
     background-color:#EEEEEE;
     margin:0px;
 }
-h1,h2{
-    font-family: 'Titillium Web', cursive;
-    color:#AC3D3D;
-}
 h1{
-    font-size:2em;
+    font-family: 'font';
+    font-weight:normal;
+    color:#AC3D3D;
+    font-size:3em;
     color:#D41313;
+}
+h2,.header a{
+    font-family: 'Titillium Web', cursive;
+    font-weight:bold;
+    color:#AC3D3D;
 }
  ul li{
     display:inline; 
@@ -103,26 +111,44 @@ a:visited , a:link , .nolink{
 .navExpand ul li {
     display:block;
     border:2px solid #D4D4D4;
-    padding:2%;
-    height:8%;
+    padding:4%;
+    height:5%;
     background-color:#fff;
+    font-size:130%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 15px 0 rgba(0, 0, 0, 0.39);
+}
+.searchBox {
+    padding:5px 9px;
+    background:rgba(50, 50, 50, 0.2);
+    border:0px solid #dbdbdb;
+}
+.searchBut {
+    position:relative;
+    padding:3px 9px;
+    left:-8px;
+    border:2px solid #AC3D3D;
+    background-color:#AC3D3D;
+    color:#fafafa;
+}
+.searchBut:hover  {
+    background-color:#fafafa;
+    color:#AC3D3D;
 }
 /*button*/
 .menu-btn div {
- padding: 5px;
- line-height: 1.2;
- font-size: 18px;
- font-weight: 200;
- vertical-align: middle;
- z-index: 99;
+     padding: 5px;
+     line-height: 1.2;
+     font-size: 18px;
+     font-weight: 200;
+     vertical-align: middle;
+     z-index: 99;
 }
  
 .menu-btn span {
- display: block;
- width: 19px;
- height: 3px;
- margin: 4px 0;
- background: rgb(0,0,0);
- z-index: 99;
+     display: block;
+     width: 19px;
+     height: 3px;
+     margin: 4px 0;
+     background: rgb(0,0,0);
+     z-index: 99;
 }
