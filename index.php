@@ -6,33 +6,9 @@ session_start();
         require 'mysql-connect.inc.php';
     }
     $db = mysqli_connect(mysql_host,mysql_user,mysql_pass);
-    mysqli_select_db($db, mysql_database)
+    mysqli_select_db($db, mysql_database);
+    include 'head.inc.html';
 ?>
-<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="css.css">
-        <link rel="apple-touch-icon" sizes="57x57" href="screen/apple-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="screen/apple-icon-60x60.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="screen/apple-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="screen/apple-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="screen/apple-icon-114x114.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="screen/apple-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="screen/apple-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="screen/apple-icon-152x152.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="screen/apple-icon-180x180.png">
-        <link rel="icon" type="image/png" sizes="192x192"  href="screen/android-icon-192x192.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="screen/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="screen/favicon-96x96.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="screen/favicon-16x16.png">
-        <link rel="manifest" href="screen/manifest.json">
-        <meta name="msapplication-TileColor" content="#ffffff">
-        <meta name="msapplication-TileImage" content="screen/ms-icon-144x144.png">
-        <meta name="theme-color" content="#ffffff">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="js.js"></script>
-    </head>
     <body>
     <div class="header">
         <h1>Bueler-Faudree Blog</h1>
@@ -67,10 +43,10 @@ session_start();
                 ?>
                 <form action="index.php" method="post">
                   Username:
-                  <input type="text" name="username">
+                  <input type="text" name="username" class="searchBox">
                   Password:
-                  <input type="password" name="password">
-                  <input type="submit" value="Log In">
+                  <input type="password" name="password" class="searchBox">
+                  <input type="submit" value="Log In" class="searchBut">
                 </form>
                 
                 <?php
@@ -96,6 +72,7 @@ session_start();
             <p>Website #1: <a href="http://twbf.github.io">twbf.github.io</a></p>
             <p>Wedsite #2: <a href="http://twbf.esy.es">twbf.esy.es</a></p>
         </div>
+        <div class="space"></div>
         <footer>
             Copyright &copy; 2016 TWBF All rights reserved.
         </footer>

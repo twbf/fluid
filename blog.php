@@ -8,63 +8,11 @@ session_start();
     }
     $db = mysqli_connect(mysql_host,mysql_user,mysql_pass);
     mysqli_select_db($db, mysql_database);
+    include 'head.inc.html';
 ?>
-<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="css.css">
-        <link rel="stylesheet" type="text/css" href="middle.css">
-        <link rel="apple-touch-icon" sizes="57x57" href="screen/apple-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="screen/apple-icon-60x60.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="screen/apple-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="screen/apple-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="screen/apple-icon-114x114.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="screen/apple-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="screen/apple-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="screen/apple-icon-152x152.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="screen/apple-icon-180x180.png">
-        <link rel="icon" type="image/png" sizes="192x192"  href="screen/android-icon-192x192.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="screen/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="screen/favicon-96x96.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="screen/favicon-16x16.png">
-        <link rel="manifest" href="screen/manifest.json">
-        <meta name="msapplication-TileColor" content="#ffffff">
-        <meta name="msapplication-TileImage" content="screen/ms-icon-144x144.png">
-        <meta name="theme-color" content="#ffffff">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="js.js"></script>
-        <script>
-            document.styleSheets[1].disabled = true;
-            function bigView(elem){
-                var clone = elem.cloneNode(true);
-                clone.id = "clone";
-                clone.removeAttribute("style");
-                clone.setAttribute("onclick","");
-                clone.className = "post";
-                var clonP = clone.getElementsByTagName("p");
-                clonP[0].setAttribute("class","none");
-                clonP[1].setAttribute("class","");
-                var middle = document.createElement("div");
-                middle.setAttribute("class","middle");
-                middle.setAttribute("id","tmp");
-                middle.appendChild(clone)
-                elem.parentNode.appendChild(middle);
-                $("#clone").prepend('<img src="Delete-50.png" class="deleteButton">');
-                clone.firstChild.setAttribute("onclick","backHome(this)");
-                document.styleSheets[1].disabled = false;
-            }
-            function backHome(elem){
-                var parent = document.getElementById("content");
-                var child = document.getElementById("tmp");
-                parent.removeChild(child);
-                document.styleSheets[1].disabled = true;
-            }
-        </script>
-    </head>
     <body>
     <div class="header">
-        <h1>B.F. BLOG</h1>
+        <h1>BF BLOG</h1>
         <form action="?action=view" method="POST">
             <input type="text" name="search" value="" class="searchBox">
             <input type="submit" value="Search"  class="searchBut">
@@ -139,7 +87,7 @@ session_start();
                     if($edit=='edit'){
                         echo '&edit-post=edit&id='.$id;
                     }
-                    echo '" method="POST" enctype= "multipart/form-data" ><p>Title:</p><input type="text" name="title" value="' . $title . '"><p>Body:</p><textarea rows="4" cols="50" name="content">' . $content . '</textarea><p>If you would like a picture to appear with your post please select one</p><input type="hidden" name="MAX_FILE_SIZE" value="2000000"/><input type="file" name="picture"><input type="submit" value="Post"></form></div></div>';
+                    echo '" method="POST" enctype= "multipart/form-data" ><p>Title:</p><input type="text" name="title" value="' . $title . '" class="searchBox"><p>Body:</p><textarea rows="4" cols="50" name="content"  class="searchBox">' . $content . '</textarea><p>If you would like a picture to appear with your post please select one</p><input type="hidden" name="MAX_FILE_SIZE" value="2000000"/><input type="file" name="picture"><input type="submit" value="Post" class="searchBut"></form></div></div>';
                 }
                 break;
             case 'admin':
@@ -243,6 +191,7 @@ session_start();
                 break;
             }
 ?>
+                <div class="space"></div>
                 <footer>
                     Copyright &copy; 2016 TWBF All rights reserved.
                 </footer>
