@@ -55,7 +55,7 @@ session_start();
             </ul>
         </nav>
     </div>
-    <div class="content">
+    <div class="content" id="noreapeat">
         <div class="post" id="p0">
             <h2>Please Registar</h2>
             <form action="blog.php?action=add" method="post">

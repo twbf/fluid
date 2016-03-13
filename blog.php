@@ -14,7 +14,7 @@ session_start();
     <div class="header">
         <h1>BF BLOG</h1>
         <form action="?action=view" method="POST">
-            <input type="text" name="search" value="" class="searchBox">
+            <input type="text" name="search" value="<?php echo $_POST['search']; ?>" class="searchBox">
             <input type="submit" value="Search"  class="searchBut">
         </form>
         <div class="menu" id="menu">
@@ -70,7 +70,7 @@ session_start();
                 }
                 if($_GET['action2']=='post'){
                     echo '<link rel="stylesheet" type="text/css" href="middle.css">';
-                    echo '<div class="middle"><div class="post">';
+                    echo '<div class="middle"><div class="post"><a href="blog.php?action=view"><img src="Delete-50.png" class="deleteButton"></a>';
                     $edit = $_GET['edit-post'];
                     $id = $_GET['id'];
                     if($_SESSION['user_auth']==5 or $_SESSION['user_auth']){

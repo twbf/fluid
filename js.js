@@ -9,16 +9,18 @@ window.onload = function (evt) {
             break;
         }
         post[i]=document.getElementById(id);
-        var string = document.getElementById(id).getElementsByTagName("p")[0].innerHTML;
-        document.getElementById(id).getElementsByTagName("p")[0].innerHTML = string.substring(0, 100) + ' ...';
-        document.getElementById(id).getElementsByTagName("p")[1].innerHTML = string;
+        if (document.getElementById('noreapeat')===null){
+            var string = document.getElementById(id).getElementsByTagName("p")[0].innerHTML;
+            document.getElementById(id).getElementsByTagName("p")[0].innerHTML = string.substring(0, 100) + ' ...';
+            document.getElementById(id).getElementsByTagName("p")[1].innerHTML = string;
+        }
     }
     Array.prototype.min = function() {
       return Math.min.apply(null, this);
     };
     function style(){
         var clums = [], 
-            colls = Math.floor(window.innerWidth/210);
+            colls = Math.floor(window.innerWidth/220);
         for(i = 0; i < colls; i++) {
             clums[i] = 100;
         }
@@ -30,9 +32,9 @@ window.onload = function (evt) {
             obj = document.getElementById(id).style;
             obj.position = "absolute";
             obj.top = clums[k] + 'px';
-            obj.width = (wW-30*colls)/colls + 'px';
+            obj.width = (wW-25*colls)/colls + 'px';
             obj.left = (wW/colls)*k + 20 + 'px';
-            clums[k] += post[i].offsetHeight + 20;
+            clums[k] += post[i].offsetHeight + 25;
         }
     }
     

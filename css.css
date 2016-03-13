@@ -72,19 +72,23 @@ footer{
 }
 .post{
     background-color:#E4E4E4;
-    padding:5px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 15px 0 rgba(0, 0, 0, 0.39);
+    border-radius: 7px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 4px 13px 0 rgba(0, 0, 0, 0.39);
     z-index:0;
 }
+.post p , .post h2{
+    padding:0 5px 0 5px;
+}
 .post img{
-    width:90%;
+    border-radius: 7px 7px 0px 0px;
+    width:100%;
     max-width:400px;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 .post .deleteButton{
-    width:8%;
+    width:30px;
     float:right;
 }
 a:visited , a:link , .nolink{
