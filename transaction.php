@@ -9,7 +9,7 @@ session_start();
     $mysqli = new mysqli("localhost", "root", "abcdef", "bf-blog");
     mysqli_select_db($db, mysql_database);
     
-    if($_SESSION['user_auth']>=1 or $_GET['action']=='add'){
+    if($_SESSION['user_auth']>=1 or $_GET['action']=='add' or $_GET['action']=='delete'){
         function delete($database, $databaseid){
             global $_GET, $db;
             $id = $_GET['id'];

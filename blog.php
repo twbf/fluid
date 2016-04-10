@@ -63,7 +63,8 @@ session_start();
                     echo '<p class="nolink" id="shorten">' . $row['post_content'] . '</p>';
                     echo '<p class="none"></p><p class="small">'. $row['post_date'] . '</p>';
                     if($_SESSION['user_id']==$row['post_user_id']){
-                        echo'<p><a href="?action=view&action2=post&edit-post=edit&id=' . $row['post_word_id'] . '">Edit</a></p>'; 
+                        echo'<p><a href="?action=view&action2=post&edit-post=edit&id=' . $row['post_word_id'] . '">Edit  </a></p>'; 
+                        echo'<p><a href="transaction.php?action=delete&what=post&id=' . $row['post_word_id'] . '">Delete  </a></p>'; 
                     }  
                     echo '</div>';
                     $counter++;
