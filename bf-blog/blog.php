@@ -70,8 +70,8 @@ session_start();
                     echo '<p class="nolink">'. substr($row['post_content'], 0, 100) . '...</p>';
                     echo '<p class="small">'. $row['post_date'] . '</p>';
                     if($_SESSION['user_id']==$row['post_user_id']){
-                        echo'<p><a href="?action=post&edit-post=edit&id=' . $row['post_word_id'] . '">Edit</a></p>'; 
-                    }  
+                        echo'<p><a href="?action=post&edit-post=edit&id=' . $row['post_word_id'] . '">Edit</a></p>';
+                    }
                     echo '</div></a>';
                     $counter++;
                 }
@@ -86,8 +86,8 @@ session_start();
                     echo '<p>'. $row['post_content'] . '</p>';
                     echo '<p class="small">'. $row['post_date'] . '</p>';
                     if($_SESSION['user_id']==$row['post_user_id']){
-                        echo'<p><a href="?action=post&edit-post=edit&id=' . $row['post_word_id'] . '">Edit</a></p>'; 
-                    }  
+                        echo'<p><a href="?action=post&edit-post=edit&id=' . $row['post_word_id'] . '">Edit</a></p>';
+                    }
                     echo '</div>';
                 }
                 break;
@@ -181,7 +181,7 @@ session_start();
                 echo '<form action="transaction.php?action=add';
                 if($edit=='edit'){
                     echo '&edit-user=edit&id='.$id;
-                } 
+                }
                 echo '" method="post"><p>Username:</p><input type="text" name="name" value="' . $name . '"><p>Password:';
                 if($edit=='edit'){
                     echo '(please leave blank to not change password)';
@@ -217,4 +217,3 @@ session_start();
         header("Location: index.php");
     }
 ?>
-
